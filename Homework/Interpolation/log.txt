@@ -1,0 +1,9 @@
+set term png;
+set out 'out.png';
+set key top left;
+set tics out;
+set xlabel 'x';
+set ylabel 'y';
+set title 'Linear interpolation';
+plot 'out.data.txt' index 0 with points title 'data',
+'out.data.txt' index 1  using 1:2 with line title 'Linear interpolation'
