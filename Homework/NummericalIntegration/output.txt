@@ -1,0 +1,124 @@
+
+Part C) about error computation is included in parts A), B) as well...
+
+__________________________________________________________________
+A)
+Recursive adaptive integrator
+Testing integrator on different integrals...
+
+∫_0^1 dx √(x) = 2/3 = 0.666667
+---------------------------------
+Result of numerical integration  : 0.666954
+Error goal                       : 0.001666666666666666556800847
+Actual error                     : 0.0002872423879883845287963595
+Computed error estimate          : 0.0007716487114193329444056246
+Function was called 16 times...
+
+∫_0^1 dx 4√(1-x²) = π = 3.14159
+---------------------------------
+Result of numerical integration  : 3.14183
+Error goal                       : 0.004141592653589792893953359
+Actual error                     : 0.0002419244374745055381481507
+Computed error estimate          : 0.002511826016330469951709503
+Function was called 28 times...
+
+__________________________________________________________________
+B)
+Open quadrature with Clenshaw–Curtis variable transformation
+
+∫_0^1 dx 1/√(x) = 2 =  2
+---------------------------------
+Result of numerical integration with Clenshaw-Curtis  : 1.99999
+Error goal                       : 0.003000000000000000062450045
+Actual error                     : 7.989535677488390774669824e-06
+Computed error estimate          : 0.002151820567206280676586516
+Function was called 16 times...
+
+Result of numerical integration without Clenshaw-Curtis  : 1.99996
+Error goal                       : 0.003000000000000000062450045
+Actual error                     : 3.849992195137375006197544e-05
+Computed error estimate          : 0.001305726130353901393021943
+Function was called 8572 times...
+
+∫_0^1 dx ln(x)/√(x) = -4 =  -4
+---------------------------------
+Result of numerical integration with Clenshaw-Curtis  : -3.99987
+Error goal                       : 0.005000000000000000104083409
+Actual error                     : 0.0001261435385928599828275765
+Computed error estimate          : 0.003736058825433403920296405
+Function was called 96 times...
+
+Result of numerical integration without Clenshaw-Curtis  : -3.99992
+Error goal                       : 0.005000000000000000104083409
+Actual error                     : 8.29410008478248528263066e-05
+Computed error estimate          : 0.003656259147616781456785473
+Function was called 8604 times...
+
+∫_0^1 dx 4√(1-x²) = π =  3.14159
+---------------------------------
+Result of numerical integration with Clenshaw-Curtis  : 3.14158
+Error goal                       : 0.004141592653589792893953359
+Actual error                     : 1.626710629309968680900056e-05
+Computed error estimate          : 0.00342212475666156404688345
+Function was called 44 times...
+
+Result of numerical integration without Clenshaw-Curtis  : 3.14183
+Error goal                       : 0.004141592653589792893953359
+Actual error                     : 0.0002419244374745055381481507
+Computed error estimate          : 0.002511826016330469951709503
+Function was called 28 times...
+
+Result of numerical integration with GSL Clenshaw-Curtis  : 3.14159
+Error goal                       : 0.004141592653589792893953359
+Actual error                     : 3.179088889915249183104606e-07
+Computed error estimate          : 0.001825312538654571409280081
+Function was called 135 times...
+__________________________________________________________________
+
+C)
+Infinite limits
+
+∫_-inf^inf dx exp(-x²) = √π = 1.77245
+---------------------------------
+Result of numerical integration  : 1.77269
+Error goal                       : 0.002772453850905515996411177
+Actual error                     : 0.0002362493293657230708504358
+Computed error estimate          : 0.001949670170547971280450295
+Function was called 72 times...
+
+Result of numerical GSL integration  : 1.77245
+Error goal                       : 0.002772453850905515996411177
+Actual error                     : 1.22146737169259722577408e-12
+Computed error estimate          : 4.316364671564515420598696e-06
+Function was called 0 times...
+(QAGI-methods cannot return number of evaluations...)
+
+∫_0^inf dx 1/(1+x²) = π/2 = 1.5708
+---------------------------------
+Result of numerical integration  : 1.57087
+Error goal                       : 0.002570796326794896891065889
+Actual error                     : 7.60373087902443955954368e-05
+Computed error estimate          : 0.001148174733439616401753369
+Function was called 24 times...
+
+Result of numerical GSL integration  : 1.5708
+Error goal                       : 0.002570796326794896891065889
+Actual error                     : 5.188183216375819029053673e-11
+Computed error estimate          : 0.0001958561554299810092243106
+Function was called 0 times...
+(QAGI-methods cannot return number of evaluations...)
+
+∫-inf,0 dx  1/(1+x²) = π/2 = 1.5708
+---------------------------------
+Result of numerical integration  : 1.57087
+Error goal                       : 0.002570796326794896891065889
+Actual error                     : 7.60373087902443955954368e-05
+Computed error estimate          : 0.001148174733439588646177754
+Function was called 24 times...
+
+Result of numerical GSL integration  : 1.5708
+Error goal                       : 0.002570796326794896891065889
+Actual error                     : 5.188183216375819029053673e-11
+Computed error estimate          : 0.0001958561554299810092243106
+Function was called 0 times...
+(QAGI-methods cannot return number of evaluations...)

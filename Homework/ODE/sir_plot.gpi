@@ -1,0 +1,11 @@
+set terminal png
+set title "SIR model of Denmark, $T_c = 2.5, T_r = 25$"
+set xlabel "t [days]"
+set ylabel "Number"
+set key outside
+set output "sir_plot.png"
+set grid
+set tics in
+plot "SIR_ODE_output.txt" using 1:2 with line linewidth 3 col MidnightBlue title "$S(t), S_0 = 5122381$"\
+, "SIR_ODE_output.txt" using 1:3 with line linewidth 3 col BrickRed title "$I(t), I_0 = 11162$"\
+, "SIR_ODE_output.txt" using 1:4 with line linewidth 3 col SeaGreen title "$R(t), R_0 = 674637$"\

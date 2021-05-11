@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/eigenvalues.dir/main.c.o CMakeFiles/eigenvalues.dir/jacobi.c.o CMakeFiles/eigenvalues.dir/utilities.c.o CMakeFiles/eigenvalues.dir/diffClock.c.o CMakeFiles/eigenvalues.dir/test_runtime.c.o  -o eigenvalues /usr/lib/x86_64-linux-gnu/libgsl.so /usr/lib/x86_64-linux-gnu/libgslcblas.so 

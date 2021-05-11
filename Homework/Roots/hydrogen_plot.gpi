@@ -1,0 +1,10 @@
+set terminal png
+set title "Hydrogen atom solution"
+set xlabel "$r$ in units of $r_0$"
+set ylabel "$\Psi_0(r)$"
+set key outside
+set output "hydrogen_plot.png"
+set grid
+set tics in
+plot "hydrogen.txt" using 1:2 with line linewidth 5 col MidnightBlue title "Numerical"\
+, "hydrogen.txt" using 1:4 with line linewidth 2 col ProcessBlue title "Exact"

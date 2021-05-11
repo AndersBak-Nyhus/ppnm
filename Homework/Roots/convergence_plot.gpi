@@ -1,0 +1,10 @@
+set terminal png
+set title "Convergence of the energy solution"
+set xlabel "$r_{max}$ in units of $r_0$"
+set ylabel "$\epsilon(r_{max})$"
+set key outside
+set output "convergence_plot.png"
+set grid
+set tics in
+plot "convergence.txt" using 1:2 with line linewidth 2 col MidnightBlue title "Unbound"\
+, "convergence.txt" using 1:3 with line linewidth 2 col ProcessBlue title "Bound"

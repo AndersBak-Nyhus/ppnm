@@ -1,0 +1,11 @@
+
+--Coefficients from fit: ------------------------------------ 
+C_0 (a)      = 142.404    +/- 1.00045   
+C_1 (Lambda) =  -0.171379 +/- 0.00353553 
+
+Covariance matrix: 
+   1.00089	         0	
+         0	  1.25e-05	
+
+half-life of ThX                        	t_1/2 = 4.04452 +/- 196.052 days
+This should be equal to the half-life of 224Ra 	t_1/2 = 3.66 days

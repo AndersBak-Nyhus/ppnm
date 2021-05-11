@@ -1,0 +1,11 @@
+set terminal png
+set title "Three body problem, figure eight solution"
+set xlabel "x(t)"
+set ylabel "y(t)"
+set key outside
+set output "threeprob_plot.png"
+set grid
+set tics in
+plot "threeprob_ODE_output.txt" using 2:3 with line linewidth 10 col Black title "$m_1$"\
+, "threeprob_ODE_output.txt" using 4:5 with line linewidth 6 col MidnightBlue title " $m_2$"\
+, "threeprob_ODE_output.txt" using 6:7 with line linewidth 2 col ProcessBlue title " $m_3$"\

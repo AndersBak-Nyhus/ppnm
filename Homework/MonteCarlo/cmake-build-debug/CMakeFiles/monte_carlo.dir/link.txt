@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/monte_carlo.dir/main.c.o CMakeFiles/monte_carlo.dir/montecarlo.c.o  -o monte_carlo 

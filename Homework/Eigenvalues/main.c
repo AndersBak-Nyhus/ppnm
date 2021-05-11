@@ -1,0 +1,113 @@
+#include <stdio.h>
+#include <time.h>
+#include <math.h>
+
+#include <gsl/gsl_matrix.h>
+#include <gsl/gsl_blas.h>
+
+#include "jacobi.h"
+#include "utilities.h"
+
+void test_runtime(int numOfReps, int startRep, char* my_outputFilename, char* gsl_outputFilename, unsigned int* seed);
+
+int main(int argc, char* argv[]){
+    printf("\n\n");
+    printf("Part A):\n");
+    printf("______________________________________________\n");
+    unsigned int seed = time(NULL);
+    int dims = 5;
+
+    gsl_matrix* matrix      =  gsl_matrix_alloc(dims, dims);
+    gsl_matrix* eigVecMat   =  gsl_matrix_alloc(dims, dims);
+    gsl_matrix* eigValMat   =  gsl_matrix_alloc(dims, dims);
+
+    set_data_symmetric(matrix, &seed);
+    gsl_matrix_memcpy(eigValMat, matrix);
+
+    print_matrix(dims, matrix, "Symmetric matrix A before diagonalization:");
+    jacobiDiag(eigValMat, eigVecMat);
+    
+    gsl_matrix* tmp             =  gsl_matrix_alloc(dims, dims);
+    gsl_matrix* testIdentity    =  gsl_matrix_alloc(dims, dims);
+    gsl_matrix* testDiag        =  gsl_matrix_alloc(dims, dims);
+    gsl_matrix* testMat         =  gsl_matrix_alloc(dims, dims);
+
+    gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1.0, matrix,    eigVecMat, 0.0, tmp          );
+    gsl_blas_dgemm(CblasTrans,   CblasNoTrans, 1.0, eigVecMat, tmp,       0.0, testDiag     );
+    gsl_blas_dgemm(CblasTrans,   CblasNoTrans, 1.0, eigVecMat, eigVecMat, 0.0, testIdentity );
+    gsl_blas_dgemm(CblasNoTrans, CblasTrans,   1.0, eigValMat, eigVecMat, 0.0, tmp          );
+    gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1.0, eigVecMat, tmp,       0.0, testMat      );
+
+
+    print_matrix(dims, eigVecMat,    "Matrix of eigenvectors V:     ");
+    print_matrix(dims, testIdentity, "Testing that V^T  * V = 1:    ");
+    print_matrix(dims, eigValMat,    "Matrix of eigenvalues D:      ");
+    print_matrix(dims, testDiag,     "Testing that V^T * A * V = D: ");
+    print_matrix(dims, matrix,       "Symmetric matrix A:           ");
+    print_matrix(dims, testMat,      "Testing that V * D * V^T = A: ");
+
+
+    // Part B
+    printf("\n\n");
+    printf("Part B):\n");
+    printf("______________________________________________\n");
+
+    FILE* myOutputFilestream = fopen(argv[1], "w");
+
+    int divisions = 50;
+    printf("Dividing solution interval into %i divisions...\n", divisions);
+    double s = 1.0 / (divisions + 1);
+    gsl_matrix* hamiltonian = gsl_matrix_alloc(divisions, divisions);
+    for(int id = 0; id < divisions - 1; id++){
+        gsl_matrix_set(hamiltonian,   id,     id,     -2 );
+        gsl_matrix_set(hamiltonian,   id,   id + 1, 1  );
+        gsl_matrix_set(hamiltonian, id + 1, id,     1  );
+    }
+    gsl_matrix_set(hamiltonian,divisions - 1, divisions - 1, -2);
+    gsl_matrix_scale(hamiltonian,-1 / s / s);
+    printf("Generating hamiltonian matrix...\n");
+
+    gsl_matrix* eigStates = gsl_matrix_alloc(divisions,divisions);
+    jacobiDiag(hamiltonian, eigStates);
+
+    printf("\nChecking that the eigen-energies are correct:\n");
+    printf("#\tCalc.\tExact\n");
+    for (int energy = 0; energy < divisions / 3; energy++){
+        double exact = M_PI*M_PI*(energy + 1)*(energy + 1);
+        double calculated = gsl_matrix_get(hamiltonian, energy, energy);
+        printf("%i\t%.5g\t%.5g\n", energy, calculated, exact);
+    }
+
+    for(int energy = 0; energy < 3; energy++) {
+        fprintf(myOutputFilestream, "0\t0\t");
+    }
+    fprintf(myOutputFilestream, "\n");
+    for(int i = 0; i < divisions; i++){
+        fprintf(myOutputFilestream, "%.5g\t", (i + 1.0) / (divisions + 1));
+        for(int energy = 0; energy < 3; energy++) {
+            fprintf(myOutputFilestream, "%.5g\t", gsl_matrix_get(eigStates, i, energy));
+        }
+        fprintf(myOutputFilestream, "\n");
+    }
+    fprintf(myOutputFilestream, "1\t");
+    for(int energy = 0; energy < 3; energy++) {
+        fprintf(myOutputFilestream, "0\t");
+    }
+    fprintf(myOutputFilestream, "\n");
+
+    gsl_matrix_free(matrix);
+    gsl_matrix_free(eigValMat);
+    gsl_matrix_free(eigVecMat);
+    gsl_matrix_free(tmp);
+    gsl_matrix_free(testDiag);
+    gsl_matrix_free(testIdentity);
+    gsl_matrix_free(testMat);
+    gsl_matrix_free(hamiltonian);
+
+    int numOfReps = 300;
+    int startRep  = 200;
+    test_runtime(numOfReps, startRep, argv[2], argv[3], &seed);
+
+    return 0;
+}
+

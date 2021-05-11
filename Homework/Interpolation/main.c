@@ -10,11 +10,11 @@ double linterp_integ(int,double*,double*,double);
 int main(int argc,char* argv[]){
 FILE* outFileStream_lin = fopen(argv[1],"w");
 //creating random points to interpolate
-	int n=20;
+	int n=50;
 	double x[n],y[n];
 	for(int i=0;i<n;i++){
-		x[i] = 0.5+i;
-		y[i] = 0.2*i+RND;
+		x[i] = 0.5+i*0.5;
+		y[i] = 0.4*i+RND;
 		printf("%g %g\n",x[i],y[i]);
 	}
 	printf("\n\n\n");

@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/least-squares.dir/main.c.o CMakeFiles/least-squares.dir/leastSquares.c.o CMakeFiles/least-squares.dir/gramSchmidt.c.o CMakeFiles/least-squares.dir/input2Array.c.o CMakeFiles/least-squares.dir/utilities.c.o  -o least-squares /usr/lib/x86_64-linux-gnu/libgsl.so /usr/lib/x86_64-linux-gnu/libgslcblas.so 

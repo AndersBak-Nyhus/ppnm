@@ -1,0 +1,10 @@
+set terminal png
+set title "Plot of harmonic function"
+set xlabel "x"
+set ylabel "f(x)"
+set key top
+set output "harmonic_plot.png"
+set grid
+set tics in
+plot "harmonic_ODE_output.txt" using 1:4 with line linewidth 5 col MidnightBlue title "sin(x)"\
+, "harmonic_ODE_output.txt" using 1:2 with line linewidth 2 col Processblue title "ODE solution"\

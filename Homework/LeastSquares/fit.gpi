@@ -1,0 +1,18 @@
+set terminal png
+set title "Fit"
+set output "$@"
+set xlabel "Time [days]"
+set ylabel "Percent activity"
+set key top
+set output "fit.png"
+set grid
+set tics in
+load "fit.plt"
+f(x) = a*exp(lambda*x)
+g(x) = dap*exp(dlambdap*x)
+h(x) = dam*exp(dlambdam*x)
+plot f(x) with line lw 2 col MidnightBlue title "Fit"\
+,g(x) with line lw 1 linetype 4 col Black title "Fit + $5\%$ error"\
+,h(x) with line lw 1 linetype 4 col Black title "Fit - $5\%$ error"\
+,"data.txt" using 1:2 with points col Black pointtype 1 title "Datapoints"\
+,"data.txt" using 1:2:3 with yerrorbars col Black pointtype 1 title "$5\%$ error"\

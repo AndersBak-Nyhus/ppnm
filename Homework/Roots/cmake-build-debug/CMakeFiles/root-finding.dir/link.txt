@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/root-finding.dir/main.c.o CMakeFiles/root-finding.dir/rootfinding.c.o CMakeFiles/root-finding.dir/gramSchmidt.c.o CMakeFiles/root-finding.dir/RK-ODE.c.o  -o root-finding /usr/lib/x86_64-linux-gnu/libgsl.so /usr/lib/x86_64-linux-gnu/libgslcblas.so 

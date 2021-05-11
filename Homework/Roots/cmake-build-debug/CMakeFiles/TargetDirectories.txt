@@ -1,0 +1,3 @@
+/home/marc/Dropbox/repos/ppnm/homework/root-finding/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/marc/Dropbox/repos/ppnm/homework/root-finding/cmake-build-debug/CMakeFiles/root-finding.dir
+/home/marc/Dropbox/repos/ppnm/homework/root-finding/cmake-build-debug/CMakeFiles/edit_cache.dir
