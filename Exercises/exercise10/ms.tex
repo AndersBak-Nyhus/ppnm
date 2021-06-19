@@ -2,13 +2,39 @@
 \usepackage{graphicx}
 \usepackage{fullpage}
 \usepackage{blindtext}
+\usepackage{amsmath}
 \title{Quick and dirty exponential function}
 \author{Anders Bak-Nyhus}
 \date{}
 \begin{document}
 \maketitle
 
-\blindtext
+\section*{The exponential function}
+An exponential function, is a function of the form
+\begin{equation}
+	f(x) = ab^x
+\end{equation}
+A more interesting case of exponential functions, is the one with the base e, where the exponential function is it's own derivative
+\begin{equation}
+	\frac{d}{dt}e^x = e^x
+\end{equation}
+The exponential function can be written as a power series
+\begin{equation}
+	e^x = \sum_{k=0}^{\infty} \frac{x^k}{k!}
+\end{equation}
+\section*{Implementing the exponential function}
+There are different ways of how to implement the exponential function, in c code. 
+In math.h there is an exponential function, where we use exp(x), however there could be a reason for not using this implementation, and might want to make your own.
+One implementation could be the so called quick and dirty (QAD) implementation described below.
+\\
+\textit{double ex(double x){\\
+	if(x $<$ 0) return 1/ex(-x);\\
+	if(x $>$ 1./8) return pow(ex(x/2),2);\\
+	return $1+x*(1+x/2*(1+x/3*(1+x/4*(1+x/5*(1+x/6*(1+x/7*(1+x/8*(1+x/9*(1+x/10)))))))))$;
+}
+}
+\\
+
 
 \begin{figure}[h]
 	\input{fig-gpl.tex}
