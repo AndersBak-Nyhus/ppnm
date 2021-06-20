@@ -33,4 +33,4 @@ main: main.o linterp.o
 
 .PHONEY: clean
 clean:
-	$(RM) *.o out* *.svg test* log*
+	$(RM) *.o out* *.svg test* log* *.png

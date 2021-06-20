@@ -1,0 +1,11 @@
+set terminal png
+set output "$@"
+set key outside
+set tics in
+set grid
+set xlabel "rows/cols, $n$"
+set ylabel "Runtime, $t$"
+set title "QR runtime"
+set output "partC_gsl.png"
+plot "QRclock_gsl.txt" using 1:2 with line lw 2 col MidnightBlue title "GSL runtime"\
+, "QRclock_my.txt" using 1:3 with line lw 2 col Black title "$\mathcal{O}(n^3)$"\

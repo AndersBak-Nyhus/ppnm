@@ -7,7 +7,7 @@
 
 #include "diffClock.h"
 #include "gramSchmidt.h"
-#include "utilities.h"
+#include "extraFuncs.h"
 
 
 void test_runtime(int numOfReps, int startRep, char* my_outputFilename, char* gsl_outputFilename, unsigned int* seed){

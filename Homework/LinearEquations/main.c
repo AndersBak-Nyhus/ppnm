@@ -3,7 +3,7 @@
 #include <time.h>
 
 #include "gramSchmidt.h"
-#include "utilities.h"
+#include "extraFuncs.h"
 #include "diffClock.h"
 
 #include <gsl/gsl_matrix.h>
