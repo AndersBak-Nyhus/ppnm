@@ -1,8 +1,6 @@
 set terminal png
 set output "$@"
-set key outside
 set tics in
-set grid
 set xlabel "rows/cols, $n$"
 set ylabel "Runtime, $t$"
 set title "QR runtime"
