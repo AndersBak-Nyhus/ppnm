@@ -34,7 +34,12 @@ One implementation could be the so called quick and dirty (QAD) implementation d
 }
 }
 \\
-
+This implementation, is an approximation of the power series mentioned above, where the sum goes from $k=0$ to $k=10$, it is however a convoluted version so as to have less operations, and save time. As it is only an approximation, the implementation of the exponential function, might differ from the $exp$ function you get through using math.h.\\
+Now as for why this implementation might be usefulf, we need to look at the amount of operations, needed to run it. We need to determine how fast and how accurate we need our program to be, and if we want it to be faster with less accuracy, it is useful to have less terms, so that the program can run through it faster.\\
+If the program only needs to handle numbers between less than one, then we can neglect more terms, as the terms in the power series becomes smaller and smaller.
+\\
+\section*{Test of implementation}
+In the figure below, two different ways of implementing the exponential function, has been plotted. One being the $exp$ function from math.h, the other being the quick and dirty implementation described above. As can be seen from the figure, the two plots are identical, so in this case the implementation is useful, especially if it saves time.
 
 \begin{figure}[h]
 	\input{fig-gpl.tex}
