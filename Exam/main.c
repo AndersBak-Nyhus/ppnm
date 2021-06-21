@@ -31,6 +31,9 @@ int main(void)
 	//Interpolation in the x-direction
 	double R1 =  linearInterpolation(Xdata[0], F11, Xdata[1], F21, Xdata[2]);
 	double R2 =  linearInterpolation(Xdata[0], F12, Xdata[1], F22, Xdata[2]);
+	//by doing interpolation first in the x-direction on the two lines and then over y, with the two interpolated values, the total sequence is a bilinear interpolation rutine
+
+
 	printf("vector elements:\n");
 	printf("x1=%g, x2=%g\n",Xdata[0],Xdata[1]);
 	printf("y1=%g, y2=%g\n",Ydata[0],Ydata[1]);
@@ -51,5 +54,9 @@ int main(void)
 	free(Fvalsy1);
 	free(Fvalsy2);
 	printf("\n change values of x_i,x_j and y_i,y_j in x_i_y_i.txt file as well as interpolated point in the third line\n");
-	printf("\n change matrix values F_ij in F_ijVals.txt");
+	printf("collum 1 corresponds to x and collum 2 corresponds to y\n");
+	printf("line 1 and 2 are the vector elements, and the third line is the point (x,y)\n");
+	printf("\n change matrix values F_ij in F_ijVals.txt\n");
+	printf("collum 1 correspond to y1 and collum 2 to y2\n");
+	printf("line 1 corresponds to x1 and line 2 corresponds to x2\n");
 }

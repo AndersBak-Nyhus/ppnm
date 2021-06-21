@@ -12,5 +12,9 @@ The interpolated value of the function at (x=14, y=48) is equal to 3.372
 
 
  change values of x_i,x_j and y_i,y_j in x_i_y_i.txt file as well as interpolated point in the third line
+collum 1 corresponds to x and collum 2 corresponds to y
+line 1 and 2 are the vector elements, and the third line is the point (x,y)
 
  change matrix values F_ij in F_ijVals.txt
+collum 1 correspond to y1 and collum 2 to y2
+line 1 corresponds to x1 and line 2 corresponds to x2
