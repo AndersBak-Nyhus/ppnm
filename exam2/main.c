@@ -6,21 +6,23 @@
 #include<gsl/gsl_matrix.h>
 #include<gsl/gsl_blas.h>
 #include<gsl/gsl_linalg.h>
-
+#include "bilinear.h"
 
 int main(void)
 {
 	double numOfPts = 40;
 	double *Xdata = malloc(numOfPts*sizeof(double));
 	double *Ydata = malloc(numOfPts*sizeof(double));
-	double *Fdata = malloc(numOfPts*sizeof(double));
-	double *Fdata1 = malloc(numOfPts*sizeof(double));
+	double numOfPts2 = 100;
+	double *Fdata = malloc(numOfPts2*sizeof(double));
+	double *Fdata1 = malloc(numOfPts2*sizeof(double));
 	//read input.txt so as to create the vectors. collum 1 is x and collum 2 is y
 	//the third line in the input.txt corresponds to the point P(x,y)
 	// where we want to know the value of the function
 	input2Array(Xdata,Ydata,"dataPts.txt");
 	
 	input2Array(Fdata,Fdata1,"dataVals.txt");
+
 	int n = 5;
 	gsl_matrix* F =gsl_matrix_alloc(n,n);
 	gsl_matrix_set(F,0,0,Fdata[0]);
@@ -48,11 +50,11 @@ int main(void)
         gsl_matrix_set(F,2,4,Fdata[22]);
         gsl_matrix_set(F,3,4,Fdata[23]);
         gsl_matrix_set(F,4,4,Fdata[24]);
-
+//printf("%g\n",Xdata[0]);
 	double a = -1; double b =1;
-
-	for(double px = a; px < b; px += 0.1){
-		for(double py = a; py < b; px += 0.1){
+//double c = 0.5;
+	for(double px = a; px <= b; px += 0.2){
+		for(double py = a; py <= b; py += 0.2){
 			double fp = bilinear(5, Xdata, Ydata, F,px,py);
 			printf("%g\t%g\t%g\n",px,py,fp);
 		}

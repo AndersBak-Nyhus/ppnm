@@ -3,8 +3,8 @@
 #include <math.h>
 #include <assert.h>
 int binsearch(int n, double* XData, double z){
-
-//	assert(n>1 && z>=XData[0] && z<=XData[n]);
+	int n = 5;
+	assert(n>1 && z>=XData[0] && z<=XData[n]);
 	int i=0,j=n-1;
 
 	while(j-i>1){
