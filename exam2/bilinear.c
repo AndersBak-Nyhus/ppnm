@@ -16,10 +16,10 @@ void bilinear(int n, double* XData, double* YData, double* FData, double px, dou
 
 
 
-	double R1 =  linearInterpolation(XData[ix], FData[ix,ix], XData[ix+1], FData[ix+1,ix], XData[ix]+px);
-	double R2 =  linearInterpolation(XData[ix], FData[ix,ix+1], XData[ix+1], FData[ix+1,ix+1], XData[ix]+px);
+	double R1 =  linearInterpolation(XData[ix], FData[ix,ix], XData[ix+1], FData[ix+1,ix], px);
+	double R2 =  linearInterpolation(XData[ix], FData[ix,ix+1], XData[ix+1], FData[ix+1,ix+1], px);
 
-	double  P =  linearInterpolation(YData[iy],  R1, YData[iy+1],  R2, YData[iy]+py);
-	return P;
+	double  P =  linearInterpolation(YData[iy],  R1, YData[iy+1],  R2, py);
+	printf("%g\t%g\t%g\n",px,py,P);
 }
 
