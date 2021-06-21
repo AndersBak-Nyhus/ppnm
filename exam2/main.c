@@ -53,10 +53,10 @@ int main(void)
 //printf("%g\n",Xdata[0]);
 	double a = -1; double b =1;
 //double c = 0.5;
-	for(double px = a; px <= b; px += 0.2){
-		for(double py = a; py <= b; py += 0.2){
+	for(double px = a; px <= b; px += 0.1){
+		for(double py = a; py <= b; py += 0.1){
 			double fp = bilinear(5, Xdata, Ydata, F,px,py);
-			printf("\n%g\t%g\t%g\n",px,py,fp);
+			printf("\n%g\t%g\t%g\n",py,px,fp);
 		}
 	
 	}
