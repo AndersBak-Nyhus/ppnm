@@ -1,0 +1,16 @@
+vector elements:
+x1=10, x2=20
+y1=40, y2=50
+
+ point we want to interpolate:
+P=(x=14,y=48)
+
+ The interpolated value of the function at R1=(x,y1) is 1.74
+The interpolated value of the function at R2=(x,y2) is 3.78
+
+The interpolated value of the function at (x=14, y=48) is equal to 3.372
+
+
+ change values of x_i,x_j and y_i,y_j in x_i_y_i.txt file as well as interpolated point in the third line
+
+ change matrix values F_ij in F_ijVals.txt
