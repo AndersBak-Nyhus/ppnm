@@ -56,7 +56,7 @@ int main(void)
 	for(double px = a; px <= b; px += 0.2){
 		for(double py = a; py <= b; py += 0.2){
 			double fp = bilinear(5, Xdata, Ydata, F,px,py);
-			printf("%g\t%g\t%g\n",px,py,fp);
+			printf("\n%g\t%g\t%g\n",px,py,fp);
 		}
 	
 	}

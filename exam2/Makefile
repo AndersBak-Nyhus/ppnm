@@ -9,8 +9,10 @@ HD = input2Array.h bilinear.h binsearch.h
 OBJ = input2Array.o main.o binsearch.o bilinear.o
 EXE = main
 
-all: output.txt
+all: output.txt out.img.svg
 
+out.img.svg: plot.img.gpi output.txt
+	gnuplot $<
 
 $(TXT): main 
 	./$<  >$(TXT)

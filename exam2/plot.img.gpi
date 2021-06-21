@@ -1,0 +1,28 @@
+# set output filetype to png, background to white
+set term svg background rgb "white"
+
+# set output name
+set out "out.img.svg"
+
+# set title and title size
+set title "Interpolation" font ",20"
+
+# set z = 0 to be at the xy-plane
+set ticslevel 0
+
+# set labels on each axis
+set xlabel "x"
+set ylabel "y"
+set zlabel "z"
+
+# set the view angle
+set view 60,35
+
+# The bi-linear interpolated values are plotted with blie lines, and the data is
+# plotted as orange points. The graph is restricted to x-,y-, and z-values
+# between -1 and 1 in order to avoid some plotting artifacts - the fulle plot
+# has lines running underneath the data caused by the order the bi-linear values
+# are plotted in. This can be seen by setting the interval to [-2.5,2.5]
+splot[-1:1][-1:1][-1:1] "output.txt" w l lc rgb "#0080ff" title "Bilinear interpolation of the data points"
+#,\
+#"output.txt" w p pt 7 ps 0.75 lc rgb "#ff7f00" title "Data points following z=x²-y²"
