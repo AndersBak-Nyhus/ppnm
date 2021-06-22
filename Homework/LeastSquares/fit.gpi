@@ -2,10 +2,9 @@ set terminal png
 set title "Fit"
 set output "$@"
 set xlabel "Time [days]"
-set ylabel "Percent activity"
+set ylabel "Activity"
 set key top
 set output "fit.png"
-set grid
 set tics in
 load "fit.plt"
 f(x) = a*exp(lambda*x)

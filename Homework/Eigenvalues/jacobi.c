@@ -1,6 +1,3 @@
-//
-// Created by marc on 3/26/21.
-//
 #include <math.h>
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_blas.h>

@@ -1,38 +1,14 @@
-//
-// Created by marc on 4/12/21.
-//
-
 #include "functions.h"
 #include <math.h>
 #include <gsl/gsl_vector.h>
 
 void harmonicFunc(double var, gsl_vector* funcVal, gsl_vector* funcDeriv){
-    /*
-     *  A testing function, the harmonic oscillator
-     *
-     *      d^2 u/dt = -u
-     *
-     *  written as a first order planar equation
-     *
-     *      dy/dt = f(t,y)
-     *
-     *  which simply takes a variable (var) representing t, and a vector y,
-     *  and then fills out funcDeriv, a vector, that represents the RHS
-     *  of the above ODE. For use with the RK-ODE.h methods.
-     *
-     */
-
+    
     gsl_vector_set(funcDeriv, 0,   gsl_vector_get(funcVal, 1));
     gsl_vector_set(funcDeriv, 1, - gsl_vector_get(funcVal, 0));
 }
 
 void SIRmodel(double var, gsl_vector* funcVal, gsl_vector* funcDeriv){
-    /*
-     *  SIR-model function implementation as a six dimensional
-     *  planar equation to use with the ODE solver from RK-ODE.h
-     *  which implements a runge-kutta-method ode-solver.
-     *
-     */
 
     double populationSize  =  5808180;  // Populations size of Denmark
     double contactTime     =  2.5;      // Contact time in days
@@ -51,12 +27,7 @@ void SIRmodel(double var, gsl_vector* funcVal, gsl_vector* funcDeriv){
 }
 
 void SIRmodel2(double var, gsl_vector* funcVal, gsl_vector* funcDeriv){
-    /*
-     *  This function is the same model as the one just above
-     *  instead here T_c has been double to study the effect
-     *  of increasing values of this parameter.
-     *
-     */
+
 
     double populationSize  =  5808180;  // Populations size of Denmark
     double contactTime     =  5;        // Contact time, HERE DOUBLED
@@ -75,12 +46,7 @@ void SIRmodel2(double var, gsl_vector* funcVal, gsl_vector* funcDeriv){
 }
 
 void threeBodyProb  (double var, gsl_vector* funcVal, gsl_vector* funcDeriv){
-    /*
-     * The three body problem function for use with the ODE-solver methods
-     * found in RK-ODE.h, here implemented for the special case of equal
-     * masses of the three particles.
-     *
-     */
+
     double gravitationalConst   =   1;
     double mass_1               =   1;
     double mass_2               =   mass_1;

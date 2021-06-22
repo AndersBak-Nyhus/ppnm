@@ -93,13 +93,8 @@ void wavefunc_bound(gsl_vector* vals, gsl_vector* funcVals){
 }
 
 int main(int argc, char* argv[]){
-    // _________________________________________________________________________________________________________________
-
-    printf( "\n####################################################################################  " );
-    printf( "\n# ---- A) NEWTONS METHOD WITH NUMERICAL JACOBIAN AND BACK-TRACKING LINESEARCH ---- #  " );
-    printf( "\n####################################################################################\n" );
-
-    printf("\nTesting root finding method on the gradient  f(x) = 1 + (x-a)² + (y-b)² ...\n");
+    printf( "\nPart A) ");
+    printf("\nRoot finding method on  f(x) = 1 + (x-a)² + (y-b)² ...\n");
     printf("Using a = %i, b = %i\n", 6, 13);
 
     int numOfDims = 2;
@@ -108,31 +103,26 @@ int main(int argc, char* argv[]){
     gsl_vector_set(minimum, 0, 4);
     gsl_vector_set(minimum, 1, 10);
 
-    printf("Using tolerance:               ε       = %g\n", tolerance);
-    printf("The initial guess is:          (x, y)  = (%g, %g)\n", gsl_vector_get(minimum, 0), gsl_vector_get(minimum, 1));
-    printf("The actual minimum is at:      (x, y)  = (6, 13)\n");
+    printf("Tolerance: E = %g\n", tolerance);
+    printf("Initial guess: (x, y)  = (%g, %g)\n", gsl_vector_get(minimum, 0), gsl_vector_get(minimum, 1));
+    printf("Minimum:(x, y) = (6, 13)\n");
     newtonMethod(testFunc, minimum, tolerance);
-    printf("The found minima is at:        (x, y)  = (%g, %g)\n", gsl_vector_get(minimum, 0), gsl_vector_get(minimum, 1));
+    printf("Found minima: (x, y)  = (%g, %g)\n", gsl_vector_get(minimum, 0), gsl_vector_get(minimum, 1));
 
 
-    printf("\nTesting root finding method on the gradient of the Rosenbrock Valley function...\n");
+    printf("\nRoot finding on Rosenbrock Valley function\n");
 
     gsl_vector_set(minimum, 0, 0.5);
     gsl_vector_set(minimum, 1, 0.5);
 
-    printf("Using tolerance:               ε       = %g\n", tolerance);
-    printf("The initial guess is:          (x, y)  = (%g, %g)\n", gsl_vector_get(minimum, 0), gsl_vector_get(minimum, 1));
-    printf("The actual minimum is at:      (x, y)  = (1, 1)\n");
+    printf("Using tolerance: E  = %g\n", tolerance);
+    printf("Initial guess: (x, y)  = (%g, %g)\n", gsl_vector_get(minimum, 0), gsl_vector_get(minimum, 1));
+    printf("Minimum: (x, y)  = (1, 1)\n");
     newtonMethod(rosenbrockValley_grad, minimum, tolerance);
-    printf("The found minima is at:        (x, y)  = (%g, %g)\n", gsl_vector_get(minimum, 0), gsl_vector_get(minimum, 1));
-
-    // _________________________________________________________________________________________________________________
+    printf("Found minima: (x, y)  = (%g, %g)\n", gsl_vector_get(minimum, 0), gsl_vector_get(minimum, 1));
 
 
-    printf( "\n###############################################################################################  " );
-    printf( "\n# ---- B) BOUND STATES OF HYDROGEN ATOM WITH SHOOTING METHOD FOR BOUNDARY VALUE PROBLEMS ---- #  " );
-    printf( "\n###############################################################################################\n" );
-    printf("\nSolving the hydrogen atom and finding the optimal energy...\n");
+    printf( "\nPart B)" );
 
     gsl_vector* minimum_hydrogen        =   gsl_vector_alloc(1);
     gsl_vector* minimum_hydrogen_bound  =   gsl_vector_alloc(1);
@@ -144,7 +134,7 @@ int main(int argc, char* argv[]){
     newtonMethod(wavefunc,       minimum_hydrogen,       tolerance);
     newtonMethod(wavefunc_bound, minimum_hydrogen_bound, tolerance);
 
-    printf("Energy found by root-finding  (unbound) = %g\n", energy);
+    printf("Energy = %g\n", energy);
 
     int dim  =  2;                                          // The order of the harmonic function
     gsl_vector* funcValRight  =  gsl_vector_alloc(dim);     // Vector to hold final value
@@ -160,22 +150,12 @@ int main(int argc, char* argv[]){
     gsl_vector_set(funcValLeft, 0, (leftEndpt - leftEndpt*leftEndpt));
     gsl_vector_set(funcValLeft, 1, (1 - 2.*leftEndpt));
 
-    printf("Solving the differential equation with the found energy...\n");
     FILE* path2File = fopen(argv[1], "w"); // Set up filestream to write ODE solution to
     rkdriver(schrodingerEq, leftEndpt, funcValLeft, rightEndpt, funcValRight, step, absAcc, relAcc, path2File);
     fclose(path2File);
-    printf("Done! The function is plotted in hydrogen_plot.png!\n");
-    // _________________________________________________________________________________________________________________
 
-
-    printf( "\n########################################################################  " );
-    printf( "\n# ---- C) BETTER BOUNDARY CONDITION FOR THE HYDROGEN ATOM PROBLEM ---- #  " );
-    printf( "\n########################################################################\n" );
-    printf("\nSolving the bound state of the hydrogen atom and finding the optimal energy...\n");
-
-    printf("Energy found by root-finding (bound) = %g\n", bound_energy);
-
-    printf("Investigating convergence of the energy minimum as a function of r_{max}...\n");
+    printf( "\nPart C)");
+    printf("Energy= %g\n", bound_energy);
 
     double exact_energy = -0.5;
     FILE* convergenceData = fopen("convergence.txt", "w");
@@ -191,7 +171,6 @@ int main(int argc, char* argv[]){
         fprintf(convergenceData, "%g\t%g\t%g\n", maxPt, fabs(energy - exact_energy), fabs(bound_energy - exact_energy));
     }
     fclose(convergenceData);
-    printf("Done! Please see convergence_plot.png!\n");
 
     gsl_vector_free(minimum);
     gsl_vector_free(minimum_hydrogen);

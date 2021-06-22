@@ -4,7 +4,7 @@
 
 #include <gsl/gsl_matrix.h>
 
-#include "utilities.h"
+#include "extrafuncs.h"
 #include "input2Array.h"
 #include "gramSchmidt.h"
 #include "leastSquares.h"
@@ -47,14 +47,14 @@ int main(int argc, char* argv[]){
   double lambda  =  gsl_vector_get(coeffsVec, 1); // -lambda
   write_coeffs(OutputFile, lambda, scale, sqrt(gsl_matrix_get(covMat, 0, 0)), sqrt(gsl_matrix_get(covMat, 1, 1)));
 
-  printf("\n--Coefficients from fit: ------------------------------------ \n");
+  printf("\n Fit coefficients: \n");
   printf("C_0 (a)      = %lg    +/- %lg   \n", scale,  sqrt(gsl_matrix_get(covMat, 0, 0)));
   printf("C_1 (Lambda) =  %lg +/- %lg \n", lambda, sqrt(gsl_matrix_get(covMat, 1, 1)));
 
   print_matrix(NumberOfFuncs, covMat, "Covariance matrix: ");
 
-  printf("\nhalf-life of ThX                        \tt_1/2 = %lg +/- %lg days\n", log(2)/(-lambda), log(2)/(sqrt(gsl_matrix_get(covMat, 1, 1))));
-  printf("This should be equal to the half-life of 224Ra \tt_1/2 = %lg days\n", 3.66                );
+  printf("\nhalf-life of ThX     \tt_1/2 = %lg +/- %lg days\n", log(2)/(-lambda), log(2)/(sqrt(gsl_matrix_get(covMat, 1, 1))));
+  printf("Should be the same as 224Ra \tt_1/2 = %lg days\n", 3.66                );
 
 
   return 0;

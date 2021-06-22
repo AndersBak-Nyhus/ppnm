@@ -1,3 +1,0 @@
-/home/marc/Dropbox/repos/ppnm/homework/monte-carlo/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/marc/Dropbox/repos/ppnm/homework/monte-carlo/cmake-build-debug/CMakeFiles/monte_carlo.dir
-/home/marc/Dropbox/repos/ppnm/homework/monte-carlo/cmake-build-debug/CMakeFiles/edit_cache.dir

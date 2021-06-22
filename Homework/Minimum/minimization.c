@@ -1,8 +1,3 @@
-//
-// Created by marc on 5/6/21.
-//
-
-
 #include<stdio.h>
 #include<math.h>
 #include<gsl/gsl_vector.h>
@@ -135,6 +130,6 @@ void quasi_newtonMethod(double func(gsl_vector*), gsl_vector* minimum, double to
     gsl_vector_free(solutionChange);
     gsl_vector_free(broydenVec);
 
-    fprintf(stderr, "quasi_newtonMethod: \n  number of steps = %i,\n  number of scales = %i,\n  number of hessian matrix resets = %i\n  f(x) = %.1e\n\n", numOfSteps, numOfScales, numOfResets, funcVal);
+    fprintf(stderr, "quasi_newtonMethod: \n  Steps = %i,\n  Scales = %i,\nHessian matrix resets = %i\n  f(x) = %.1e\n\n", numOfSteps, numOfScales, numOfResets, funcVal);
 
 }

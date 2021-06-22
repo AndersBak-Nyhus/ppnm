@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/minimization.dir/main.c.o CMakeFiles/minimization.dir/minimization.c.o  -o minimization /usr/lib/x86_64-linux-gnu/libgsl.so /usr/lib/x86_64-linux-gnu/libgslcblas.so 

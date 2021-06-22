@@ -1,7 +1,3 @@
-//
-// Created by marc on 5/5/21.
-//
-
 #ifndef HAVE_ROOTFINDING_H
 #define HAVE_ROOTFINDING_H
 

@@ -6,14 +6,14 @@
 #include <gsl/gsl_blas.h>
 
 #include "jacobi.h"
-#include "utilities.h"
+#include "extrafuncs.h"
 
 void test_runtime(int numOfReps, int startRep, char* my_outputFilename, char* gsl_outputFilename, unsigned int* seed);
 
 int main(int argc, char* argv[]){
     printf("\n\n");
     printf("Part A):\n");
-    printf("______________________________________________\n");
+    printf("\n");
     unsigned int seed = time(NULL);
     int dims = 5;
 
@@ -24,7 +24,7 @@ int main(int argc, char* argv[]){
     set_data_symmetric(matrix, &seed);
     gsl_matrix_memcpy(eigValMat, matrix);
 
-    print_matrix(dims, matrix, "Symmetric matrix A before diagonalization:");
+    print_matrix(dims, matrix, "Before diagonalization:");
     jacobiDiag(eigValMat, eigVecMat);
     
     gsl_matrix* tmp             =  gsl_matrix_alloc(dims, dims);
@@ -39,23 +39,23 @@ int main(int argc, char* argv[]){
     gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1.0, eigVecMat, tmp,       0.0, testMat      );
 
 
-    print_matrix(dims, eigVecMat,    "Matrix of eigenvectors V:     ");
-    print_matrix(dims, testIdentity, "Testing that V^T  * V = 1:    ");
-    print_matrix(dims, eigValMat,    "Matrix of eigenvalues D:      ");
-    print_matrix(dims, testDiag,     "Testing that V^T * A * V = D: ");
+    print_matrix(dims, eigVecMat,    "Eigenvectors V:     ");
+    print_matrix(dims, testIdentity, "Check V^T  * V = 1:    ");
+    print_matrix(dims, eigValMat,    "Eigenvalues D:      ");
+    print_matrix(dims, testDiag,     "Check V^T * A * V = D: ");
     print_matrix(dims, matrix,       "Symmetric matrix A:           ");
-    print_matrix(dims, testMat,      "Testing that V * D * V^T = A: ");
+    print_matrix(dims, testMat,      "Check V * D * V^T = A: ");
 
 
     // Part B
     printf("\n\n");
     printf("Part B):\n");
-    printf("______________________________________________\n");
+    printf("\n");
 
     FILE* myOutputFilestream = fopen(argv[1], "w");
 
     int divisions = 50;
-    printf("Dividing solution interval into %i divisions...\n", divisions);
+    printf("Dividing into %i divisions\n", divisions);
     double s = 1.0 / (divisions + 1);
     gsl_matrix* hamiltonian = gsl_matrix_alloc(divisions, divisions);
     for(int id = 0; id < divisions - 1; id++){
@@ -65,13 +65,13 @@ int main(int argc, char* argv[]){
     }
     gsl_matrix_set(hamiltonian,divisions - 1, divisions - 1, -2);
     gsl_matrix_scale(hamiltonian,-1 / s / s);
-    printf("Generating hamiltonian matrix...\n");
+    printf("Hamiltonian\n");
 
     gsl_matrix* eigStates = gsl_matrix_alloc(divisions,divisions);
     jacobiDiag(hamiltonian, eigStates);
 
-    printf("\nChecking that the eigen-energies are correct:\n");
-    printf("#\tCalc.\tExact\n");
+    printf("\nEigen-energies:\n");
+    printf("#\tCalculated\tExact\n");
     for (int energy = 0; energy < divisions / 3; energy++){
         double exact = M_PI*M_PI*(energy + 1)*(energy + 1);
         double calculated = gsl_matrix_get(hamiltonian, energy, energy);
@@ -104,8 +104,8 @@ int main(int argc, char* argv[]){
     gsl_matrix_free(testMat);
     gsl_matrix_free(hamiltonian);
 
-    int numOfReps = 300;
-    int startRep  = 200;
+    int numOfReps = 100;
+    int startRep  = 50;
     test_runtime(numOfReps, startRep, argv[2], argv[3], &seed);
 
     return 0;

@@ -1,9 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 #define RND (double)rand()/RAND_MAX
-double linterp(int,double*,double*,double);
+double linearInt(int,double*,double*,double);
 #include<math.h>
-double linterp_integ(int,double*,double*,double);
+double linearIntinteg(int,double*,double*,double);
 #include<gsl/gsl_interp.h>
 
 
@@ -25,9 +25,9 @@ FILE* outFileStream_lin = fopen(argv[1],"w");
 
 	double dz = 0.01;
 	for(double z=x[0];z<=x[n-1];z+=dz){
-		double lz = linterp(n,x,y,z);
+		double lz = linearInt(n,x,y,z);
 		
-		double integral_lz = linterp_integ(n,x,y,z);
+		double integral_lz = linearIntinteg(n,x,y,z);
 		
 		double gsl_interp_l = gsl_interp_eval(linear,x,y,z,NULL);
 		
@@ -44,7 +44,7 @@ FILE* outFileStream_lin = fopen(argv[1],"w");
 //		fprintf(stderr,"%g %g\n",x[i],y[i]);
 //	}
 	fprintf(stderr,"#m=1,S=0\n");
-	for(double z=x[0];z<=x[n-1];z+=dz) fprintf(outFileStream_lin,"%g\t %g\t %g\n",z,linterp(n,x,y,z),linterp_integ(n,x,y,z));
+	for(double z=x[0];z<=x[n-1];z+=dz) fprintf(outFileStream_lin,"%g\t %g\t %g\n",z,linearInt(n,x,y,z),linearIntinteg(n,x,y,z));
 //	printf("\n\n");
 //	for(double z=x[0];z<=x[n-1];z+=dz) printf(stderr,"%g %g\n",z,linterp_integ(n,x,y,z);
         

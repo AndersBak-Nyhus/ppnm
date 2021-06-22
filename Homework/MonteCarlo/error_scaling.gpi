@@ -1,10 +1,8 @@
 set terminal png
-set title "Error scaling as a function of sample points"
-set xlabel "N (Number of sample points)"
-set ylabel "Computed error"
-set key outside
-set output "error_scaling.png"
-set grid
+set title "Error scaling"
+set xlabel "Sample points"
+set ylabel "Calculates error"
+set output "error.png"
 set tics in
 set log y
 plot "error_scaling.txt" using 1:2 with line linewidth 2 col MidnightBlue title "Pseudo-random"\

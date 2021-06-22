@@ -1,7 +1,3 @@
-//
-// Created by Marc on 4/7/21.
-//
-
 #include <math.h>
 
 #include "RK-ODE.h"

@@ -1,7 +1,3 @@
-//
-// Created by marc on 4/28/21.
-//
-
 #ifndef MONTE_CARLO_MONTECARLO_H
 #define MONTE_CARLO_MONTECARLO_H
 

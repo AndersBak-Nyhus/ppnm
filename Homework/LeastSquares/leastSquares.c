@@ -3,7 +3,7 @@
 #include <gsl/gsl_blas.h>
 #include "leastSquares.h"
 #include "gramSchmidt.h"
-#include "utilities.h"
+#include "extrafuncs.h"
 
 void set_data(int         NumberOfPts, int         NumberOfFuncs, double (*fitFuncs)(int, double),
               gsl_matrix* dataMat , gsl_vector* dataVec   ,

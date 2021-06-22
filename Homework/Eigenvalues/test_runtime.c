@@ -7,7 +7,7 @@
 
 #include "diffClock.h"
 #include "jacobi.h"
-#include "utilities.h"
+#include "extrafuncs.h"
 
 
 void test_runtime(int numOfReps, int startRep, char* my_outputFilename, char* gsl_outputFilename, unsigned int* seed){

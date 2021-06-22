@@ -1,6 +1,3 @@
-//
-// Created by marc on 5/5/21.
-//
 #include <float.h>
 #include <assert.h>
 #include <math.h>

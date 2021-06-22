@@ -1,10 +1,8 @@
 set terminal png
-set title "Lowest three solutions, particle in a box"
+set title "Particle in a box"
 set xlabel "$x$"
 set ylabel "$\psi_n(x)$"
-set key outside
 set output "plot.png"
-set grid
 set tics in
 plot "box_solutions.txt" using 1:2 with line linewidth 3 col MidnightBlue title "$n = 0$"\
 , "box_solutions.txt" using 1:3 with line linewidth 3 col BrickRed title "$n = 1$"\

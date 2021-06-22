@@ -11,7 +11,7 @@ double bound_energy;
 double maxPt;
 double bound_maxPt;
 
-double testFunc (gsl_vector* vals){
+double testFunction(gsl_vector* vals){
     // 1 + (x-a)^2 + (y-b)^2
     double x = gsl_vector_get(vals, 0);
     double y = gsl_vector_get(vals, 1);
@@ -19,44 +19,73 @@ double testFunc (gsl_vector* vals){
     double a = 6;
     double b = 13;
 
-    double funcVal = 1 + (x-a)*(x-a) + (y-b)*(y-b);
+    double Vals = 1 + (x-a)*(x-a) + (y-b)*(y-b);
 
-    return funcVal;
+    return Vals;
 }
 
-void rosenbrockValley_grad (gsl_vector* vals, gsl_vector* funcVals) {
+double rosenbrockValley(gsl_vector* vals) {
     double x = gsl_vector_get(vals, 0);
     double y = gsl_vector_get(vals, 1);
 
-    // Set f(x) to be the gradient, f(x) = grad(x)
-    gsl_vector_set(funcVals, 0, (-1)*2*(1 - x) + (-2*x)*2*100*(y - x*x));
-    gsl_vector_set(funcVals, 1, 2*100*(y - x*x));
+    double Vals = (1-x)*(1-x)+100*(y-x*x)*(y-x*x);
+    return Vals; 
+}
+
+double himmelblau(gsl_vector* vals){
+	double x = gsl_vector_get(vals,0);
+	double y = gsl_vector_get(vals,1);
+
+	double Vals = (x*x+y-11)*(x*x+y-11)+(x+y*y-7)*(x+y*y-7);
+	return Vals;
 }
 
 int main(int argc, char* argv[]){
-    // _________________________________________________________________________________________________________________
 
-    printf( "\n################################  " );
-    printf( "\n# ------- MINIMIZATION ------- #  " );
-    printf( "\n################################\n" );
-    printf("\n-- A) Quasi-Newton method with numerical gradient, back-tracking linesearch, and rank-1 update --\n");
+    printf("\nPart A)\n");
 
-    printf("\nTesting the minimization routine, on f(x) = 1 + x² + y² ...\n");
-    double a = 6;
-    double b = 13;
-    double initial_x_val = a - 2;
-    double initial_y_val = b - 3;
+    printf("\nTest on f(x) = 1 + x² + y² ...\n");
+    double min_x = 6;
+    double min_y = 13;
+    double ini_x = min_x - 2;
+    double ini_y = min_y - 3;
 
     int dims = 2;
     double tolerance = 1e-5;
     gsl_vector* minimum = gsl_vector_alloc(dims);
-    gsl_vector_set(minimum, 0, initial_x_val );
-    gsl_vector_set(minimum, 0, initial_y_val );
+    gsl_vector_set(minimum, 0, ini_x);
+    gsl_vector_set(minimum, 0, ini_y);
 
-    printf("The initial value is at (x, y) = (%g, %g)\n", initial_x_val, initial_y_val);
-    quasi_newtonMethod(testFunc, minimum, tolerance);
-    printf("The found  minima is at (x, y) = (%g, %g)\n", gsl_vector_get(minimum, 0), gsl_vector_get(minimum, 1));
-    printf("The actual minima is at (x, y) = (%g, %g)\n", a, b);
+    printf("Initial value (x, y) = (%g, %g)\n", ini_x, ini_y);
+    quasi_newtonMethod(testFunction, minimum, tolerance);
+    printf("Minima (x, y) = (%g, %g)\n", gsl_vector_get(minimum, 0), gsl_vector_get(minimum, 1));
+    printf("Real minima (x, y) = (%g, %g)\n", min_x, min_y);
 
+
+	printf("\n\nRosenbrock's\n");
+	min_x = 1;
+	min_y = 1;
+	ini_x = min_x-1;
+	ini_y = min_y-1;
+
+	gsl_vector_set(minimum, 0, ini_x);
+	gsl_vector_set(minimum, 0, ini_y);
+
+    printf("Initial value (x, y) = (%g, %g)\n", ini_x, ini_y);
+    quasi_newtonMethod(rosenbrockValley, minimum, tolerance);
+    printf("Minima (x, y) = (%g, %g)\n", gsl_vector_get(minimum, 0), gsl_vector_get(minimum, 1));
+
+        printf("\n\nHimmelblau's\n");
+        min_x = 3;
+        min_y = 2;
+        ini_x = min_x-1;
+        ini_y = min_y-1;
+
+        gsl_vector_set(minimum, 0, ini_x);
+        gsl_vector_set(minimum, 0, ini_y);
+
+    printf("Initial value (x, y) = (%g, %g)\n", ini_x, ini_y);
+    quasi_newtonMethod(himmelblau, minimum, tolerance);
+    printf("Minima (x, y) = (%g, %g)\n", gsl_vector_get(minimum, 0), gsl_vector_get(minimum, 1));    
     return 0;
 }

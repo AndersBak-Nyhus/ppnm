@@ -1,3 +1,0 @@
-/home/marc/Dropbox/repos/ppnm/homework/least-squares/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/marc/Dropbox/repos/ppnm/homework/least-squares/cmake-build-debug/CMakeFiles/least-squares.dir
-/home/marc/Dropbox/repos/ppnm/homework/least-squares/cmake-build-debug/CMakeFiles/edit_cache.dir

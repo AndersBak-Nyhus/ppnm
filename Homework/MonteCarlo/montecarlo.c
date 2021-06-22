@@ -1,7 +1,3 @@
-//
-// Created by marc on 4/28/21.
-//
-
 #include "montecarlo.h"
 
 #include <math.h>

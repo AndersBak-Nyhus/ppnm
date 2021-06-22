@@ -1,3 +1,0 @@
-/home/marc/Dropbox/repos/ppnm/homework/numerical-integration/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/marc/Dropbox/repos/ppnm/homework/numerical-integration/cmake-build-debug/CMakeFiles/numerical_integration.dir
-/home/marc/Dropbox/repos/ppnm/homework/numerical-integration/cmake-build-debug/CMakeFiles/edit_cache.dir
