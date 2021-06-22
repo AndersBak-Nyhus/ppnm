@@ -5,5 +5,5 @@ set ylabel "Error"
 set title "Error scaling"
 set yrange [0:0.15]
 set output "error.png"
-plot "error.txt" using 1:2 with line color red title "plainMC" \
-, "error.txt" using 1:3 with line color blue title "quasiMC"
+plot "error.txt" using 1:2 with line color red title "plain Monte Carlo" \
+, "error.txt" using 1:3 with line color blue title "quasi Monte Carlo"
