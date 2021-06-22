@@ -29,7 +29,7 @@ out.png: $(TXT) $(LIN) Makefile
 $(LIN)  $(TXT): main
 	./$< $(LIN) 1>$(TXT)
 
-main: main.o linterp.o
+main: main.o LinInt.o
 
 .PHONEY: clean
 clean:
