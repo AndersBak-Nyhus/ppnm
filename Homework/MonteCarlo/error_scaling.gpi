@@ -1,9 +1,0 @@
-set terminal png
-set title "Error scaling"
-set xlabel "Sample points"
-set ylabel "Calculates error"
-set output "error.png"
-set tics in
-set log y
-plot "error_scaling.txt" using 1:2 with line linewidth 2 col MidnightBlue title "Pseudo-random"\
-, "error_scaling.txt" using 1:3 with line linewidth 2 col BrickRed title "Quasi-random"

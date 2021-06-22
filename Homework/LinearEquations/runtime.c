@@ -5,30 +5,30 @@
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_linalg.h>
 
-#include "diffClock.h"
+#include "timer.h"
 #include "gramSchmidt.h"
 #include "extraFuncs.h"
 
 
-void test_runtime(int numOfReps, int startRep, char* my_outputFilename, char* gsl_outputFilename, unsigned int* seed){
+void runtime(int Reps, int startRep, char* my_outputFilename, char* gsl_outputFilename, unsigned int* seed){
   double scale      =  0   ;
-  int numOfDims;
+  int Dims;
 
   FILE* myOutputFileStream      =  fopen(my_outputFilename,  "w");
   FILE* myOutputFileStream_gsl  =  fopen(gsl_outputFilename, "w");
 
 
-  for (int rep = startRep; rep < numOfReps; rep++){
-    numOfDims = rep;
+  for (int rep = startRep; rep < Reps; rep++){
+    Dims = rep;
 
-    gsl_matrix* my_ortg    =  gsl_matrix_alloc(numOfDims, numOfDims);
-    gsl_matrix* my_triang  =  gsl_matrix_alloc(numOfDims, numOfDims);
-    gsl_vector* my_vecTmp  =  gsl_vector_alloc(numOfDims           );
+    gsl_matrix* my_ortg    =  gsl_matrix_alloc(Dims, Dims);
+    gsl_matrix* my_triang  =  gsl_matrix_alloc(Dims, Dims);
+    gsl_vector* my_vecTmp  =  gsl_vector_alloc(Dims           );
 
     set_data(my_ortg, my_vecTmp, seed);
 
     clock_t my_begin  = clock(); // We define variables to hold the times used for timing the computations.
-    clock_t my_end    = clock(); // These are defined in <time.h> and used in diffClock(). It is my own implementation.
+    clock_t my_end    = clock(); // These are defined in <time.h> and used in timer(). It is my own implementation.
 
     my_begin = clock(); // Begin timing
 
@@ -38,22 +38,22 @@ void test_runtime(int numOfReps, int startRep, char* my_outputFilename, char* gs
     my_end = clock(); // end timing
 
     if (rep == startRep){
-      scale = (double)(diffClock(my_end, my_begin));
+      scale = (double)(timer(my_end, my_begin));
     }
 
-    fprintf(myOutputFileStream, "%d\t%g\t%g\n", numOfDims, (double)(diffClock(my_end, my_begin)), pow(((double)numOfDims)/startRep, 3)*scale);
+    fprintf(myOutputFileStream, "%d\t%g\t%g\n", Dims, (double)(timer(my_end, my_begin)), pow(((double)Dims)/startRep, 3)*scale);
 
     gsl_matrix_free(my_ortg);
     gsl_matrix_free(my_triang);
     gsl_vector_free(my_vecTmp);
   }
 
-  for (int rep = startRep; rep < numOfReps; rep++){
-    numOfDims = rep;
+  for (int rep = startRep; rep < Reps; rep++){
+    Dims = rep;
 
-    gsl_matrix* gsl_ortg    =  gsl_matrix_alloc(numOfDims, numOfDims);
-    gsl_matrix* gsl_triang  =  gsl_matrix_alloc(numOfDims, numOfDims);
-    gsl_vector* my_vecTmp   =  gsl_vector_alloc(numOfDims);
+    gsl_matrix* gsl_ortg    =  gsl_matrix_alloc(Dims, Dims);
+    gsl_matrix* gsl_triang  =  gsl_matrix_alloc(Dims, Dims);
+    gsl_vector* my_vecTmp   =  gsl_vector_alloc(Dims);
 
     set_data(gsl_ortg, my_vecTmp , seed);
 
@@ -64,7 +64,7 @@ void test_runtime(int numOfReps, int startRep, char* my_outputFilename, char* gs
     gsl_linalg_QR_decomp(gsl_ortg, my_vecTmp);
     gsl_end = clock();
 
-    fprintf(myOutputFileStream_gsl, "%d\t%g\n", numOfDims, (double)(diffClock(gsl_end, gsl_begin)));
+    fprintf(myOutputFileStream_gsl, "%d\t%g\n", Dims, (double)(timer(gsl_end, gsl_begin)));
 
     gsl_matrix_free(gsl_ortg);
     gsl_matrix_free(gsl_triang);

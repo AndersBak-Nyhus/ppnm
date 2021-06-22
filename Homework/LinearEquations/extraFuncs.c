@@ -2,13 +2,13 @@
 #include <gsl/gsl_blas.h>
 
 #include "extraFuncs.h"
-
+//creates random number
 double randomNumber( unsigned int *seed ){
-  double maxRand      =   (double)RAND_MAX;           // Maximum random number, cast to double
-  double randNum      =   (double)rand_r( seed );     // Generate pseudo-random number from seed, cast to double
+  double maxRand      =   (double)RAND_MAX;           
+  double randNum      =   (double)rand_r( seed );     
   return randNum/maxRand;
 }
-
+//print vector in output
 void vector_print(char* string, gsl_vector* vector){
 	printf("%s\n", string);
 	for(int iter = 0; iter < vector -> size; iter++){
@@ -17,14 +17,8 @@ void vector_print(char* string, gsl_vector* vector){
   printf("\n");
 }
 
+//setting data inside matrices
 void set_data(gsl_matrix* tallMatrix, gsl_vector* tallRHSVector, unsigned int *seed){
-  /* Method to set the data of a tall matrix using pseudorandom numbers.
-   *
-   *  ¤ gsl_matrix*    tallMatrix     : An arbitrary n x m matrix (n >= m)
-   *  ¤ gsl_vector*    tallRHSVector  : A vector of dimension n x 1
-   *  ¤ unsigned int*  seed           : A seed for the pseudorandom number generator
-   *
-   */
 
   for(int rowId = 0; rowId < tallMatrix -> size1; rowId++){
 		for(int colId = 0; colId < tallMatrix -> size2; colId++){
@@ -33,19 +27,11 @@ void set_data(gsl_matrix* tallMatrix, gsl_vector* tallRHSVector, unsigned int *s
   	gsl_vector_set(tallRHSVector, rowId, randomNumber(seed));
   }
 }
-/*
-void set_data_square(gsl_matrix* testMatSquare, gsl_vector* RHSvecSquare, unsigned int *LHSseed, unsigned int *RHSseed){
-  for(int rowId = 0; rowId < testMatSquare -> size1; rowId++){
-		for(int colId = 0; colId < testMatSquare -> size2; colId++){
-  		gsl_matrix_set(testMatSquare, rowId, colId, randomNumber(LHSseed));
-		}
-  	gsl_vector_set(RHSvecSquare, rowId, randomNumber(RHSseed));
-  }
-}
-*/
-void print_matrix(int numOfRows, gsl_matrix* matrixToPrint, char* string ){
+
+//printing matrix in output
+void print_matrix(int Rows, gsl_matrix* matrixToPrint, char* string ){
   printf("\n%s\n", string);
-  for (int rowId = 0; rowId < numOfRows; rowId++){
+  for (int rowId = 0; rowId < Rows; rowId++){
     gsl_vector_view matrixToPrint_row = gsl_matrix_row (matrixToPrint, rowId);
     gsl_vector* vector = &matrixToPrint_row.vector;
   	for(int iter = 0; iter < vector -> size; iter++){

@@ -6,13 +6,13 @@ CC  		 =  gcc
 PIPE     	 =  cat
 
 EXE   	   	 =  main
-OBJ  		 =  main.o gramSchmidt.o backsub.o extraFuncs.o diffClock.o test_runtime.o
-HDRS    	 =  gramSchmidt.h backsub.h extraFuncs.h diffClock.h
+OBJ  		 =  main.o gramSchmidt.o backsub.o extraFuncs.o timer.o runtime.o
+HDRS    	 =  gramSchmidt.h backsub.h extraFuncs.h timer.h
 TXT     	 =  out.txt
 PLT              =  partC.png
 PLTGSL           =  partC_gsl.png
-PLTDATA          =  QRclock_my.txt
-PLTDATAGSL       =  QRclock_gsl.txt
+PLTDATA          =  QRtimer.txt
+PLTDATAGSL       =  QRtimer_gsl.txt
 
 .PHONEY: default
 default: print $(PLT) $(PLTGSL)
@@ -33,3 +33,4 @@ $(EXE): $(OBJ) $(HDRS)
 
 clean:
 	$(RM) $(EXE) $(TXT) $(OBJ) $(PLTDATAGSL) $(PLTDATA) $(PLT) $(PLTGSL)
+
