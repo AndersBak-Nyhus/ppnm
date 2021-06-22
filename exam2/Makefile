@@ -1,4 +1,4 @@
-CFLAGS = -Wall
+CFLAGS = -Wall -o
 CFLAGS += $(shell gsl-config --cflags)
 LDLIBS = -lm
 LDLIBS += $(shell gsl-config --libs)
@@ -11,7 +11,7 @@ EXE = main
 
 all: output.txt out.img.svg
 
-out.img.svg: plot.img.gpi output.txt
+out.img.svg: plot.img.gpi output.txt data2plot.txt
 	gnuplot $<
 
 $(TXT): main 

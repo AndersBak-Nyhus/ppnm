@@ -10,19 +10,23 @@
 
 int main(void)
 {
+	//numofPts is the number of points the function input2Array is expecting, but it doesn't always work on the exact number of pts, so in this case they are raised above
 	double numOfPts = 40;
+	//allocate memory for the x and y data
 	double *Xdata = malloc(numOfPts*sizeof(double));
 	double *Ydata = malloc(numOfPts*sizeof(double));
+
 	double numOfPts2 = 100;
+	//allocate memory for the function values
 	double *Fdata = malloc(numOfPts2*sizeof(double));
 	double *Fdata1 = malloc(numOfPts2*sizeof(double));
-	//read input.txt so as to create the vectors. collum 1 is x and collum 2 is y
-	//the third line in the input.txt corresponds to the point P(x,y)
+	//read dataPts.txt so as to create the vectors. collum 1 is x and collum 2 is y
+	//function values are in dataVals.txt where the first collum corresponds to the point P(x_i,y_j)
 	// where we want to know the value of the function
 	input2Array(Xdata,Ydata,"dataPts.txt");
 	
 	input2Array(Fdata,Fdata1,"dataVals.txt");
-
+	//create matrix for the function values
 	int n = 5;
 	gsl_matrix* F =gsl_matrix_alloc(n,n);
 	gsl_matrix_set(F,0,0,Fdata[0]);
@@ -50,21 +54,20 @@ int main(void)
         gsl_matrix_set(F,2,4,Fdata[22]);
         gsl_matrix_set(F,3,4,Fdata[23]);
         gsl_matrix_set(F,4,4,Fdata[24]);
-//printf("%g\n",Xdata[0]);
+
+	//numbers needed in the sum below
 	double a = -1; double b =1;
-//double c = 0.5;
+	//sum over both x and y in steps of 0.1
 	for(double px = a; px <= b; px += 0.1){
 		for(double py = a; py <= b; py += 0.1){
+			//send x and y to bilinear function to interpolate
 			double fp = bilinear(5, Xdata, Ydata, F,px,py);
+			//print data in output.txt to be able to plot it
 			printf("\n%g\t%g\t%g\n",py,px,fp);
 		}
 	
 	}
-	//Interpolation in the x-direction
-//	double R1 =  linearInterpolation(Xdata[0], F11, Xdata[1], F21, Xdata[2]);
-//	double R2 =  linearInterpolation(Xdata[0], F12, Xdata[1], F22, Xdata[2]);
-	//by doing interpolation first in the x-direction on the two lines and then over y, with the two interpolated values, the total sequence is a bilinear interpolation rutine
-
+	//free allocated memory
 
 	free(Xdata);
 	free(Ydata);

@@ -4,7 +4,7 @@
 #include <assert.h>
 int binsearch(int n, double* XData, double z){
 
-//	assert(n>1 && z>=XData[0] && z<=XData[n]);
+//check nearest vector element
 	int i=0,j=n-1;
 
 	while(j-i>1){
