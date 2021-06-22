@@ -26,10 +26,16 @@ double testFunc ( double* x ){
 
 int main(int argc, char* argv[]){
 
+    // ##########################################################
+    // # ------------ TEST MONTE CARLO INTEGRATOR ------------- #
+    // ##########################################################
+
     int numOfPts = (int)1e2;
 
-    printf("\nPart A)\nMonte Carlo integration\n");
-    printf("CheckMonte Carlo integration\n");
+    printf("-----------------------------------------------");
+    printf("\nA)\nPlain Monte Carlo integration\n");
+    printf("-----------------------------------------------\n");
+    printf("Testing plain Monte Carlo integration routine...\n");
 
     double exactVal     =   2.0/3.0;
     print_whichTest("∫_0^1 dx √(x) = 2/3 =", exactVal);
@@ -86,8 +92,10 @@ int main(int argc, char* argv[]){
     /*FILE* myOutPutFileStream = fopen(filename, "w");
     for (int rep = 1; rep <= totalNumOfReps; rep++){
         int thisNumOfPts = rep * stepSize;
+
         plain_montecarlo(       dim_test, lowerBound_test, upperBound_test, testFunc, thisNumOfPts, &result_test,       &error_test       );
         plain_montecarlo_quasi( dim_test, lowerBound_test, upperBound_test, testFunc, thisNumOfPts, &result_test_quasi, &error_test_quasi );
+
         fprintf(myOutPutFileStream, "%i\t%g\t%g\n", thisNumOfPts, error_test, error_test_quasi);
     }
     fclose(myOutPutFileStream);
@@ -113,3 +121,4 @@ int main(int argc, char* argv[]){
     printf("-----------------------------------------------\n");
     return 0;
 }
+

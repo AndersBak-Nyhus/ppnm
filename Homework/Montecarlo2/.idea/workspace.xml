@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="monte_carlo" targetName="monte_carlo" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f5e98fc6-1d99-477b-93cf-3decad3ea63c" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="pvCtwfrA" />
+  </component>
+  <component name="ProjectId" id="1rn3V2im9oAhTjXkSVaIQvbVOYa" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
+  </component>
+  <component name="RunManager">
+    <configuration name="monte_carlo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="monte_carlo" TARGET_NAME="monte_carlo" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="monte_carlo" RUN_TARGET_NAME="monte_carlo">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f5e98fc6-1d99-477b-93cf-3decad3ea63c" name="Default Changelist" comment="" />
+      <created>1619598046106</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1619598046106</updated>
+      <workItem from="1619598048072" duration="851000" />
+      <workItem from="1619600916588" duration="3207000" />
+      <workItem from="1619605154252" duration="1364000" />
+      <workItem from="1619607173134" duration="4615000" />
+      <workItem from="1619613838591" duration="39000" />
+      <workItem from="1619614108497" duration="3344000" />
+      <workItem from="1619617477538" duration="11409000" />
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="449" y="175" width="1022" height="731" key="SettingsEditor" timestamp="1619617637591">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="449" y="175" width="1022" height="731" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1619617637591" />
+    <state x="616" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1619617477738">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="616" y="367" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1619617477738" />
+  </component>
+</project>
