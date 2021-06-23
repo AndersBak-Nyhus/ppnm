@@ -14,17 +14,17 @@ double linearInterpolation(double x1, double f_x1, double x2, double f_x2, doubl
 }
 
 
-double bilinear(int n, double* XData, double* YData, gsl_matrix* FData, double px, double py){
+double bilinear(int nx, int ny, double* XData, double* YData, gsl_matrix* FData, double px, double py){
 	//check which element in the vector is the closest with binsearch
-	int ix = binsearch(n, XData, px);
-	int k = n;
-	int iy = binsearch(k, YData, py);
+	int ix = binsearch(nx, XData, px);
+
+	int iy = binsearch(ny, YData, py);
 
 	//get matrix elements corresponding to the nearest vector elements
-	double F11 = gsl_matrix_get(FData,ix,iy);
-	double F12 = gsl_matrix_get(FData,ix,iy+1);
-	double F21 = gsl_matrix_get(FData,ix+1,iy);
-	double F22 = gsl_matrix_get(FData,ix+1,iy+1);
+	double F11 = gsl_matrix_get(FData,iy,ix);
+	double F12 = gsl_matrix_get(FData,iy+1,ix);
+	double F21 = gsl_matrix_get(FData,iy,ix+1);
+	double F22 = gsl_matrix_get(FData,iy+1,ix+1);
 
 	//interpolate along x
 	double R1 =  linearInterpolation(XData[ix], F11, XData[ix+1],F21, px);

@@ -19,5 +19,5 @@ set zlabel "z"
 set view 65,35
 
 
-splot[-0.9:0.9][-1:1][-1:1] "output.txt" w l lc rgb "#0080ff" title "Bilinear interpolation of the data points",\
+splot[-1:1][-0.9:0.9][-1:1] "output.txt" w l lc rgb "#0080ff" title "Bilinear interpolation of the data points",\
 "data2plot.txt" w p pt 7 ps 0.75 lc rgb "#ff7f00" title "Data points following z=x²-y²"

@@ -26,8 +26,23 @@ int main(void)
 	input2Array(Xdata,Ydata,"dataPts.txt");
 	
 	input2Array(Fdata,Fdata1,"dataVals.txt");
+
+	int nx = sizeof(Xdata)-3;
+	int ny = sizeof(Ydata)-3;
+//	printf("%d\t%d\n",nx,ny);
+
+	gsl_matrix* F =gsl_matrix_alloc(nx,ny);
+	int k = 0;
+	for(int i = 0; i < nx; i += 1){
+		for(int j = 0; j < ny; j +=1){
+			int k = k+1; 
+			gsl_matrix_set(F,j,i,Fdata[k-1]);
+		}
+	}
+
+
 	//create matrix for the function values
-	int n = 5;
+/*	int n = 5;
 	gsl_matrix* F =gsl_matrix_alloc(n,n);
 	gsl_matrix_set(F,0,0,Fdata[0]);
 	gsl_matrix_set(F,1,0,Fdata[1]);
@@ -54,16 +69,16 @@ int main(void)
         gsl_matrix_set(F,2,4,Fdata[22]);
         gsl_matrix_set(F,3,4,Fdata[23]);
         gsl_matrix_set(F,4,4,Fdata[24]);
-
+*/
 	//numbers needed in the sum below
 	double a = -1; double b =1;
 	//sum over both x and y in steps of 0.1
 	for(double px = a; px <= b; px += 0.1){
 		for(double py = a; py <= b; py += 0.1){
 			//send x and y to bilinear function to interpolate
-			double fp = bilinear(5, Xdata, Ydata, F,px,py);
+			double fp = bilinear(nx, ny, Xdata, Ydata, F,px,py);
 			//print data in output.txt to be able to plot it
-			printf("\n%g\t%g\t%g\n",py,px,fp);
+			printf("\n%g\t%g\t%g\n",px,py,fp);
 		}
 	
 	}
