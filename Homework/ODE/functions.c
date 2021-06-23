@@ -10,9 +10,9 @@ void harmonicFunc(double var, gsl_vector* funcVal, gsl_vector* funcDeriv){
 
 void SIRmodel(double var, gsl_vector* funcVal, gsl_vector* funcDeriv){
 
-    double populationSize  =  5808180;  // Populations size of Denmark
-    double contactTime     =  2.5;      // Contact time in days
-    double recoveryTime    =  25;       // Recovery time in days
+    double populationSize  =  5808180;  // Population
+    double contactTime     =  2.5;      // Contact time
+    double recoveryTime    =  25;       // Recovery time
 
     double susceptible  =  gsl_vector_get(funcVal, 0);
     double infected     =  gsl_vector_get(funcVal, 1);
@@ -29,9 +29,9 @@ void SIRmodel(double var, gsl_vector* funcVal, gsl_vector* funcDeriv){
 void SIRmodel2(double var, gsl_vector* funcVal, gsl_vector* funcDeriv){
 
 
-    double populationSize  =  5808180;  // Populations size of Denmark
-    double contactTime     =  5;        // Contact time, HERE DOUBLED
-    double recoveryTime    =  25;       // Recovery time in days
+    double populationSize  =  5808180;  // Population
+    double contactTime     =  5;        // Contact time
+    double recoveryTime    =  25;       // Recovery time
 
     double susceptible  =  gsl_vector_get(funcVal, 0);
     double infected     =  gsl_vector_get(funcVal, 1);

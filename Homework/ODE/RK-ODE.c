@@ -1,7 +1,3 @@
-//
-// Created by Marc on 4/7/21.
-//
-
 #include <math.h>
 
 #include "RK-ODE.h"
@@ -18,39 +14,25 @@ void rkstep12 ( void        (*func)(double, gsl_vector*, gsl_vector*),
                 double      step                                     ,
                 gsl_vector* funcStep                                 ,
                 gsl_vector* err                                        ){
-    /*
-     *  A simple mid-point method runge-kutta stepper method, advancing
-     *  the solution of an ordinary differential equation (ODE) by a step
-     *  h. The method computes the step
-     *
-     *      y_{i + 1} = y_i + h*k
-     *
-     *  where the tangent, k, is given from
-     *
-     *      k_0     = f(x_0, y_0),
-     *      k_{1/2} = f(x_0 + (1/2)*h, y_0 + (1/2)*h*k_0),
-     *
-     */
-    int order = funcVal -> size; // This is the order of the differential equation
 
-    gsl_vector* tangent_0   =  gsl_vector_alloc(order); // This is k_0
-    gsl_vector* tangent_12  =  gsl_vector_alloc(order); // k_{1/2}
-    gsl_vector* tmpFuncVal  =  gsl_vector_alloc(order); // and finally, a temporary variable
+    int order = funcVal -> size; 
 
-    // For some reason gsl BLAS methods (see rk45 method below) don't work so we use for-loops instead
-    func(var, funcVal, tangent_0); // Call function to fill out tangent_0, creating the RHS of the ODE
+    gsl_vector* tangent_0   =  gsl_vector_alloc(order);
+    gsl_vector* tangent_12  =  gsl_vector_alloc(order);
+    gsl_vector* tmpFuncVal  =  gsl_vector_alloc(order); 
 
-    // Computing (y_0 + (1/2)*h*k_0))
-    // id variables are temporary (scoped) variables that allow us to do the vector addition
+
+    func(var, funcVal, tangent_0); 
+
+  
     for (int id = 0; id < order; ++id ){
         double funcVal_id     =  gsl_vector_get(funcVal,   id);
         double tangent_0_id   =  gsl_vector_get(tangent_0, id);
         double tmpFuncVal_id  =  funcVal_id + 0.5*step*tangent_0_id;
         gsl_vector_set(tmpFuncVal, id, tmpFuncVal_id);
     }
-    func(var + 0.5*step, tmpFuncVal, tangent_12); // Now we can fill k_{1/2} = f(x_0 + (1/2)*h, y_0 + (1/2)*h*k_0)
-
-    // Now we can advance the solution (y_{i + 1} = y_i + h*k)
+    func(var + 0.5*step, tmpFuncVal, tangent_12); 
+    
     for (int id = 0; id < order; ++id ){
         double funcVal_id      =  gsl_vector_get(funcVal,    id);
         double tangent_12_id   =  gsl_vector_get(tangent_12, id);
@@ -58,7 +40,7 @@ void rkstep12 ( void        (*func)(double, gsl_vector*, gsl_vector*),
         gsl_vector_set(funcStep, id, tmpFuncStep_id );
     }
 
-    // Compute error estimate, following dmitris method (in the example) from the book
+   
     for (int id = 0; id < order; ++id ){
         double tangent_0_id   =  gsl_vector_get(tangent_0, id);
         double tangent_12_id  =  gsl_vector_get(tangent_12, id);
@@ -73,14 +55,14 @@ void rkstep12 ( void        (*func)(double, gsl_vector*, gsl_vector*),
 }
 
 void rkstep45(
-        void (*func)(double, gsl_vector*, gsl_vector*),  /* the f from dy/dt = f(t,y) */
-        double var,                                      /* the current value of the variable */
-        gsl_vector* funcVal,                             /* the current value y(t) of the sought function */
-        double step,                                     /* the step to be taken */
-        gsl_vector* funcStep,                            /* output: y(t+h) */
-        gsl_vector* err                                  /* output: error estimate */
+        void (*func)(double, gsl_vector*, gsl_vector*),  
+        double var,                                      
+        gsl_vector* funcVal,                             
+        double step,                                     
+        gsl_vector* funcStep,                            
+        gsl_vector* err                                  
 ){
-    // THIS FUNCTION DOESN'T WORK PROPERLY!
+    
     int order = funcVal -> size;
 
     gsl_vector* funcDeriv       =   gsl_vector_alloc(order);
@@ -139,54 +121,27 @@ void rkdriver(  void (*func)(double, gsl_vector*, gsl_vector*),
                 double step      ,
                 double absAcc    ,  double relAcc             ,
                 FILE* path2File                                 ) {
-    /*
-     *  A Runge-Kutta driver method used to compute the solution to an
-     *  ordinary differential equation (ODE) of the planar form
-     *
-     *      dy/dt  =  f(t, y)
-     *
-     *  Where y is a vector of dimensionality equal to the order. The ODE is
-     *  defined on the interval [a, b]. This driver calls a stepper function
-     *  e.g. rkstep45() or rkstep12() defined above, which advances the
-     *  solution by a stepsize, h.
-     *
-     *      ¤  (*func)      :   The right hand side of the ODE, a void function
-     *                          of signature (double, gsl_vector*, gsl_vector*)
-     *      ¤  leftEndPt    :   The initial value, the left end point, a, of
-     *                          the solution interval.
-     *      ¤  funcValLeft  :   The initial function value y(a), the function
-     *                          value at the left end of the solution interval.
-     *      ¤  rightEndPt   :   The left end point, b, of the solution interval.
-     *      ¤  funcValRight :   The computed function value y(b), the function
-     *                          value at the right end of the solution interval.
-     *                          A return value that is to be computed
-     *      ¤  step         :   The initial step size h.
-     *      ¤  absAcc       :   Absolute accuracy.
-     *      ¤  relAcc       :   Relative accuracy
-     *      ¤  path2File    :   A FILE* to a file stream, to which the driver
-     *                          writes the path of the computed solution.
-     *
-     */
 
-    int order = funcValLeft -> size;  // This is the order of the differential equation
 
-    double  err         ;   // Variable to hold the error estimated from the norm of the error vector
-    double  normFuncVal ;   // Variable to hold the norm of the function values vector
+    int order = funcValLeft -> size;  
+
+    double  err         ;   
+    double  normFuncVal ;   
     double  tol         ;
 
-    gsl_vector* funcStep     =  gsl_vector_alloc(order);    // Function value, y-vector, at next step
-    gsl_vector* funcErr      =  gsl_vector_alloc(order);    // Function value error, dy-vector
-    gsl_vector* thisFuncVal  =  gsl_vector_alloc(order);    // Function value, y-vector, at current step
-    gsl_vector_memcpy(thisFuncVal, funcValLeft);            // Initiallize current y-vector as the intial value
+    gsl_vector* funcStep     =  gsl_vector_alloc(order);    
+    gsl_vector* funcErr      =  gsl_vector_alloc(order);    
+    gsl_vector* thisFuncVal  =  gsl_vector_alloc(order);    
+    gsl_vector_memcpy(thisFuncVal, funcValLeft);            
 
     double pos = leftEndpt;
-    while(pos < rightEndpt){ // Run through entire interval
-        if (path2File != NULL){ // Write data to file (t, y, dy/dt)
+    while(pos < rightEndpt){ 
+        if (path2File != NULL){ 
             fprintf(path2File, "%.5g\t", pos);
             for (int id = 0; id < order; ++id){
                 fprintf(path2File,"%.5g\t", gsl_vector_get(thisFuncVal, id));
             }
-            if ( func == harmonicFunc ){ // To compare with analytic solution, remove to keep general
+            if ( func == harmonicFunc ){ 
                 fprintf(path2File,"%.5g\n", sin(pos));
             }
             else {
@@ -194,29 +149,29 @@ void rkdriver(  void (*func)(double, gsl_vector*, gsl_vector*),
             }
         }
 
-        double trueStep;        // The final stepsize to advance by
-        double nextStep = step; // Start from initial step size passed as argument
+        double trueStep;        
+        double nextStep = step; 
 
-        if (pos + nextStep > rightEndpt) {  // If we overshoot interval bounds
-            nextStep = rightEndpt - pos;    // then define stepsize to be what remains
+        if (pos + nextStep > rightEndpt) {  
+            nextStep = rightEndpt - pos;    
         }
         do {
-            rkstep12(func, pos, thisFuncVal, nextStep, funcStep, funcErr);  // Advance with step
+            rkstep12(func, pos, thisFuncVal, nextStep, funcStep, funcErr);  
 
-            err          =  gsl_blas_dnrm2(funcErr);    // Compute error
+            err          =  gsl_blas_dnrm2(funcErr);    
             normFuncVal  =  gsl_blas_dnrm2(funcStep);
 
-            tol = (normFuncVal * relAcc + absAcc) * sqrt(nextStep / (rightEndpt - leftEndpt)); // Compute tolerance
+            tol = (normFuncVal * relAcc + absAcc) * sqrt(nextStep / (rightEndpt - leftEndpt)); 
             trueStep = nextStep;
-            nextStep *= pow(tol / err, 0.25) * 0.95;    // Nextstep will be made smaller, and used in the next iteration if we did not converge
+            nextStep *= pow(tol / err, 0.25) * 0.95;    
 
-        } while(err > tol); // Keep testing for convergence within tolerance, otherwise keep making stepsize smaller until convergence
+        } while(err > tol); 
 
-        gsl_vector_memcpy(thisFuncVal, funcStep);   // Next step will be the next current function value
-        pos += trueStep;                            // Advance current position
+        gsl_vector_memcpy(thisFuncVal, funcStep);   
+        pos += trueStep;                            
     }
 
-    gsl_vector_memcpy(funcValRight, funcStep);      // Finally fill out the function vlaue at the right end point.
+    gsl_vector_memcpy(funcValRight, funcStep);      
 
     // Free allocated memory
     gsl_vector_free(funcStep);

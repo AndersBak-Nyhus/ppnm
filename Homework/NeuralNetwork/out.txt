@@ -1,0 +1,10 @@
+Part A)
+Activation function: x*exp(-x^2)
+
+i=0, ai, bi, wi = -0.210708 1.13061 1.34058
+i=1, ai, bi, wi = 0.77737 1.2832 1.03512
+i=2, ai, bi, wi = 2.38176 0.987096 1.21837
+
+
+Part B)
+See plot.png

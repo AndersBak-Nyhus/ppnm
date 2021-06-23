@@ -5,17 +5,7 @@
 
 
 void jacobiMultiply_right(gsl_matrix* matrix, int firstId, int secondId, double angle){
-    /*
-     * Multiplies the jacobi matrix JacobiMatrix(firstId, secondId, angle) ( J(p, q, angle) )
-     * on the real symmetric matrix matrix (A) from the right, and sets matrix equal to that
-     * product; A <-- A * J(p, q, angle)
-     *
-     *      ¤ matrix    : gsl_matrix* to a real symmetric matrix, A
-     *      ¤ firstId   : the first index to rotate in, p
-     *      ¤ secondId  : the second index to rotate in, q
-     *      ¤ angle     : the angle to rotate by, angle
-     *
-     */
+
 
     double c = cos(angle);
     double s = sin(angle);
@@ -30,17 +20,7 @@ void jacobiMultiply_right(gsl_matrix* matrix, int firstId, int secondId, double 
 
 
 void jacobiMultiply_left(gsl_matrix* matrix, int firstId, int secondId, double angle){
-    /*
-     * Multiplies the jacobi matrix JacobiMatrix(firstId, secondId, angle) ( J(p, q, angle) )
-     * on the real symmetric matrix matrix (A) from the left, and sets matrix equal to that
-     * product; A <-- J(p, q, angle) * A
-     *
-     *      ¤ matrix    : gsl_matrix* to a real symmetric matrix, A
-     *      ¤ firstId   : the first index to rotate in, p
-     *      ¤ secondId  : the second index to rotate in, q
-     *      ¤ angle     : the angle to rotate by, angle
-     *
-     */
+
 
     double c = cos(angle);
     double s = sin(angle);
@@ -54,26 +34,7 @@ void jacobiMultiply_left(gsl_matrix* matrix, int firstId, int secondId, double a
 
 
 void jacobiDiag (gsl_matrix* matrix, gsl_matrix* eigVecMat) {
-    /*
-     *  Computes the eigenvalue decomposition, using the jacobi diagonalization algorithm
-     *  in which elements are jacobi rotated with cyclic sweeps to diagonalize the matrix
-     *  (A), which is a real and symmetric matrix. The eigenvalue decomposition consits of
-     *
-     *      A = V^T * D * V
-     *
-     *  Where V is an orthonormal matrix consisting of columns that are the eigenvectors of
-     *  the matrix A, and D is a diagonal matrix with eigenvalues of A on the diagonal.
-     *
-     *          ¤ matrix : gsl_matrix* to a real and symmetric matrix, A
-     *          ¤ eigVecMat : gsl_matrix* to a square matrix that will hold the matrix
-     *                        of eigenvectors, V
-     *          ¤ eigValMat : gsl_matrix* to a square matrix that will hold the matrix
-     *                        of eigenvalues, D
-     *
-     */
 
-    // Start by setting V equal to identity matrix in order to do
-    // V = I * J_1 * J_2 * .... * J_n, for n sweeps.
     gsl_matrix_set_identity(eigVecMat);
 
     int dims = matrix -> size1;

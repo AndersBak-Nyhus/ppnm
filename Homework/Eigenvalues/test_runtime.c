@@ -5,7 +5,7 @@
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_linalg.h>
 
-#include "diffClock.h"
+#include "timer.h"
 #include "jacobi.h"
 #include "extrafuncs.h"
 
@@ -27,7 +27,7 @@ void test_runtime(int numOfReps, int startRep, char* my_outputFilename, char* gs
     set_data_symmetric(my_symm, seed);
 
     clock_t my_begin  = clock(); // We define variables to hold the times used for timing the computations.
-    clock_t my_end    = clock(); // These are defined in <time.h> and used in diffClock(). It is my own implementation.
+    clock_t my_end    = clock(); // These are defined in <time.h> and used in timer(). It is my own implementation.
 
     my_begin = clock(); // Begin timing
 
@@ -37,10 +37,10 @@ void test_runtime(int numOfReps, int startRep, char* my_outputFilename, char* gs
     my_end = clock(); // end timing
 
     if (rep == startRep){
-      scale = (double)(diffClock(my_end, my_begin));
+      scale = (double)(timer(my_end, my_begin));
     }
 
-    fprintf(myOutputFileStream, "%d\t%g\t%g\n", numOfDims, (double)(diffClock(my_end, my_begin)), pow(((double)numOfDims)/startRep, 3)*scale);
+    fprintf(myOutputFileStream, "%d\t%g\t%g\n", numOfDims, (double)(timer(my_end, my_begin)), pow(((double)numOfDims)/startRep, 3)*scale);
 
     gsl_matrix_free(my_symm);
     gsl_matrix_free(my_eigVec);
@@ -62,7 +62,7 @@ void test_runtime(int numOfReps, int startRep, char* my_outputFilename, char* gs
     gsl_linalg_SV_decomp_jacobi(gsl_symm, gsl_eigVec, gsl_diag);
     gsl_end = clock();
 
-    fprintf(myOutputFileStream_gsl, "%d\t%g\n", numOfDims, (double)(diffClock(gsl_end, gsl_begin)));
+    fprintf(myOutputFileStream_gsl, "%d\t%g\n", numOfDims, (double)(timer(gsl_end, gsl_begin)));
 
     gsl_matrix_free(gsl_symm);
     gsl_matrix_free(gsl_eigVec);

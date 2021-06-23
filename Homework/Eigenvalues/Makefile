@@ -5,10 +5,10 @@ LDLIBS +=  -lm -Wall
 CC   	=  gcc
 PIPE    =  cat
 
-OUTPUT  =  box_solutions.txt timing.txt gsl_timing.txt
+OUTPUT  =  box.txt timing.txt gsl_timing.txt
 EXE   	=  main
-OBJ  	=  main.o jacobi.o extrafuncs.o diffClock.o test_runtime.o
-HDRS    =  jacobi.h extrafuncs.h diffClock.h
+OBJ  	=  main.o jacobi.o extrafuncs.o timer.o test_runtime.o
+HDRS    =  jacobi.h extrafuncs.h timer.h
 IMG   =  plot.png part_C_gsl.png part_C.png
 TXT     =  output.txt
 PLT          =  part_C.png

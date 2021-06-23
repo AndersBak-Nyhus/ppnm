@@ -1,0 +1,14 @@
+set term png
+set width 8
+set xlabel "x"
+set ylabel "y"
+set title "Interpolation"
+set output "plot.png"
+plot "Pts.txt" using 1:2 with points color black lw 5 notitle\
+, "Pts.txt" using 1:3 with points color black lw 5 notitle\
+, "Pts.txt" using 1:4 with points color black lw 5 notitle\
+, "Funcs.txt" using 1:2 with line color red title "Tabulated func"\
+, "Funcs.txt" using 1:3 with line color yellow title "Derivative"\
+, "Funcs.txt" using 1:4 with line color green title "Antiderivative"\
+
+
