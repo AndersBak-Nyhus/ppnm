@@ -8,12 +8,10 @@
 int main(){
 	int testcount = 0;
 
-	printf("\n################################################\n");
-	printf("# Testing of functions from exercise 'Komplex' #\n");
-	printf("################################################\n\n");
+
+	printf("Test functions from exercise 'Komplex'\n");
 
 	printf("Testing komplex_set(), using komplex_print(), by initiallizing a and b as\n");
-	printf("----------------------------------------------------\n");
 	komplex a, b;
 	komplex_set(&a, 1., 2.);
 	komplex_set(&b, 3., 4.);
@@ -22,7 +20,6 @@ int main(){
 	komplex_print("b =",b);
 
 	printf("\nTesting komplex_add() and komplex_equal()\n");
-	printf("----------------------------------------------------\n");
 
 	komplex aPlusB = komplex_add(a,b);
 	komplex realAPlusB = {4.,6.};
@@ -35,11 +32,10 @@ int main(){
 		testcount++;
 	}
 	else{
-		printf("Test 'add' failed: debug me, please... \n");
+		printf("'add' failed \n");
 	}
 
 	printf("\nTesting komplex_sub()\n");
-	printf("----------------------------------------------------\n");
 
 	komplex aSubB = komplex_sub(a,b);
 	komplex realASubB = {-2.,-2.};
@@ -52,11 +48,10 @@ int main(){
 		testcount++;
 	}
 	else{
-		printf("Test 'sub' failed: debug me, please... \n");
+		printf("'sub' failed \n");
 	}
 
 	printf("\nTesting komplex_mul()\n");
-	printf("----------------------------------------------------\n");
 
 	komplex aMulB = komplex_mul(a,b);
 	komplex realAMulB = {-5.,10.};
@@ -69,11 +64,10 @@ int main(){
 		testcount++;
 	}
 	else{
-		printf("Test 'mul' failed: debug me, please... \n");
+		printf("'mul' failed\n");
 	}
 
 	printf("\nTesting komplex_div()\n");
-	printf("----------------------------------------------------\n");
 
 	komplex adivB = komplex_div(a,b);
 	komplex realAdivB = {11./25.,2./25.};
@@ -86,11 +80,10 @@ int main(){
 		testcount++;
 	}
 	else{
-		printf("Test 'div' failed: debug me, please... \n");
+		printf("'div' failed \n");
 	}
 
 	printf("\nTesting komplex_conj()\n");
-	printf("----------------------------------------------------\n");
 
 	komplex aConj = komplex_conjugate(a);
 	komplex realAConj = {1., -2.};
@@ -103,12 +96,11 @@ int main(){
 		testcount++;
 	}
 	else{
-		printf("Test 'conj' failed: debug me, please... \n");
+		printf("'conj' failed\n");
 	}
 
 
 	printf("\nTesting komplex_conj()\n");
-	printf("----------------------------------------------------\n");
 
 	double aAbs = komplex_abs(a);
 	double realAAbs = sqrt(pow(1,2) + pow(2,2));
@@ -121,11 +113,10 @@ int main(){
 		testcount++;
 	}
 	else{
-		printf("Test 'abs' failed: debug me, please... \n");
+		printf("'abs' failed\n");
 	}
 
 	printf("\nTesting komplex_exp()\n");
-	printf("----------------------------------------------------\n");
 
 	komplex aExp = komplex_exp(a);
 	double complex complexA = CMPLX(1, 2);
@@ -140,11 +131,10 @@ int main(){
 		testcount++;
 	}
 	else{
-		printf("Test 'exp' failed: debug me, please... \n");
+		printf("'exp' failed \n");
 	}
 
 	printf("\nTesting komplex_sin()\n");
-	printf("----------------------------------------------------\n");
 
 	komplex aSin = komplex_sin(a);
 	double complex realASin = csin(complexA);
@@ -158,11 +148,10 @@ int main(){
 		testcount++;
 	}
 	else{
-		printf("Test 'sin' failed: debug me, please... \n");
+		printf("'sin' failed \n");
 	}
 
 	printf("\nTesting komplex_cos()\n");
-	printf("----------------------------------------------------\n");
 
 	komplex aCos = komplex_cos(a);
 	double complex realACos = ccos(complexA);
@@ -176,11 +165,10 @@ int main(){
 		testcount++;
 	}
 	else{
-		printf("Test 'cos' failed: debug me, please... \n");
+		printf("'cos' failed\n");
 	}
 
 	printf("\nTesting komplex_sqrt()\n");
-	printf("----------------------------------------------------\n");
 
 	komplex aSqrt = komplex_sqrt(a);
 	double complex realASqrt = csqrt(complexA);
@@ -194,18 +182,14 @@ int main(){
 		testcount++;
 	}
 	else{
-		printf("Test 'sqrt' failed: debug me, please... \n");
+		printf("'sqrt' failed\n");
 	}
 
 	if ( testcount == 10){
-		printf("\n#############################################\n");
-		printf("# Done! All functions are working properly! # \n");
-		printf("#############################################\n\n");
+		printf("# Done# \n");
 	}
 	else {
-		printf("\n##################################################\n");
-		printf("# Error, not all functions are working properly! # \n");
-		printf("##################################################\n\n");
+		printf("# Error, not all functions are working properly! # \n");	
 	}
 
 	return 0;

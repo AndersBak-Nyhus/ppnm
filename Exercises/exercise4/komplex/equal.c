@@ -1,7 +1,3 @@
-//
-// Implemented by Marc B. Sørensen on 2/13/21.
-//
-
 #include "funcs.h"
 #include <math.h>
 
