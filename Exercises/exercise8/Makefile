@@ -16,7 +16,7 @@ Out.error.png: Out.data.txt Makefile
 	plot [][1e-5:8e-3]\
 	"$<" using 1:3 with linespoints title "actual error"\
 	,f(x) with lines title "$$1/sqrt{N}$$"\
-	' | gnuplot
+	' | pyxplot
 
 ns = 1 1.5 2 4 8
 
