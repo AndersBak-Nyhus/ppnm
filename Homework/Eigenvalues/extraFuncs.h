@@ -1,5 +1,5 @@
-#ifndef HAVE_UTILITIES_H
-#define HAVE_UTILITIES_H
+#ifndef HAVE_EXTRAFUNCS_H
+#define HAVE_EXTRAFUNCS_H
 
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_blas.h>

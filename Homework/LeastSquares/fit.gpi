@@ -1,7 +1,7 @@
 set terminal png
 set title "Fit"
 set output "$@"
-set xlabel "Time [days]"
+set xlabel "Time"
 set ylabel "Activity"
 set key top
 set output "fit.png"
@@ -11,7 +11,7 @@ f(x) = a*exp(lambda*x)
 g(x) = dap*exp(dlambdap*x)
 h(x) = dam*exp(dlambdam*x)
 plot f(x) with line lw 2 col MidnightBlue title "Fit"\
-,g(x) with line lw 1 linetype 4 col Black title "Fit + $5\%$ error"\
-,h(x) with line lw 1 linetype 4 col Black title "Fit - $5\%$ error"\
+,g(x) with line lw 1 linetype 3 col Black title "Fit with $5\%$ error"\
+,h(x) with line lw 1 linetype 3 col Black title "Fit with $5\%$ error"\
 ,"data.txt" using 1:2 with points col Black pointtype 1 title "Datapoints"\
-,"data.txt" using 1:2:3 with yerrorbars col Black pointtype 1 title "$5\%$ error"\
+,"data.txt" using 1:2:3 with yerrorbars col Black pointtype 1 title "Error"\

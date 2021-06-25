@@ -1,7 +1,3 @@
-//
-// Created by marc on 4/7/21.
-//
-
 #ifndef CLION_TESTING_RK_ODE_H
 #define CLION_TESTING_RK_ODE_H
 
@@ -30,4 +26,4 @@ void rkdriver(  void        (*func)(double, gsl_vector*, gsl_vector*) ,
                 double      relAcc                                    ,
                 FILE*       path2File                                   );
 
-#endif //CLION_TESTING_RK_ODE_H
+#endif 

@@ -5,4 +5,4 @@
 
 void newtonMethod(void func(gsl_vector* vals, gsl_vector* funcVals), gsl_vector* startingPoint, double tolerance);
 
-#endif //HAVE_ROOTFINDING_H
+#endif

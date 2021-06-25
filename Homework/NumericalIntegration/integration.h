@@ -1,7 +1,3 @@
-//
-// Created by marc on 4/25/21.
-//
-
 #ifndef NUMERICAL_INTEGRATION_INTEGRATION_H
 #define NUMERICAL_INTEGRATION_INTEGRATION_H
 
@@ -10,4 +6,4 @@ double adapt (    double func(double), double leftEndPt, double rightEndPt, doub
 double open_quad( double func(double), double leftEndPt, double rightEndPt, double absAcc, double relAcc, double* integrationError );
 double integrate( double func(double), double leftEndPt, double rightEndPt, double absAcc, double relAcc, double* integrationError );
 
-#endif //NUMERICAL_INTEGRATION_INTEGRATION_H
+#endif 

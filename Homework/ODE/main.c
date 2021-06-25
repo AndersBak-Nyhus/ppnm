@@ -8,34 +8,29 @@ int main(int argc, char* argv[]){
         fprintf(stderr, "No arguments passed.");
         exit(-1);
     }
-    // _________________________________________________________________________________________________________________
 
 
-    // ###########################################################
-    // # ------ TEST ODE METHODS WITH HARMONIC OSCILLATOR ------ #
-    // ###########################################################
-
-    int harmonicDim  =  2;                                                  // The order of the harmonic function
-    gsl_vector* harmonicFuncValRight  =  gsl_vector_alloc(harmonicDim);     // Vector to hold final value
-    gsl_vector* harmonicFuncValLeft   =  gsl_vector_calloc(harmonicDim);    // Vector to hold initial value
-    gsl_vector_set(harmonicFuncValLeft, 1, 1);                         // Set initial value
-
-    // The ODE is defined on the interval [ leftEndpt ,  rightEndpt ]
+    int harmonicDim  =  2;                                                  
+    
+    gsl_vector* harmonicFuncValRight  =  gsl_vector_alloc(harmonicDim); 
+    
+    gsl_vector* harmonicFuncValLeft   =  gsl_vector_calloc(harmonicDim);   
+    
+    gsl_vector_set(harmonicFuncValLeft, 1, 1);                         
+    
+    
     double  leftEndpt   =   0.0;
     double  rightEndpt  =   2*M_PI;
-    double  absAcc      =   1e-3;                               // Absolute accuracy
-    double  relAcc      =   1e-3;                               // Relative accuracy
-    double  step        =   (rightEndpt - leftEndpt) / 10;      // Initial stepsize
+    double  absAcc      =   1e-3;                               
+    double  relAcc      =   1e-3;                               
+    double  step        =   (rightEndpt - leftEndpt) / 10;      
 
-    FILE* harmonic_outputStream = fopen(argv[1], "w"); // Set up filestream to write ODE solution to
-    rkdriver(&harmonicFunc, leftEndpt, harmonicFuncValLeft, rightEndpt, harmonicFuncValRight, step, absAcc, relAcc, harmonic_outputStream);    // Call ODE solver
+    FILE* harmonic_outputStream = fopen(argv[1], "w"); 
+    
+    rkdriver(&harmonicFunc, leftEndpt, harmonicFuncValLeft, rightEndpt, harmonicFuncValRight, step, absAcc, relAcc, harmonic_outputStream);    
     fclose(harmonic_outputStream);
-    // _________________________________________________________________________________________________________________
-
-
-    // ###########################################################
-    // # -------- SOLVE THE SIR MODEL USING ODE-SOLVER --------- #
-    // ###########################################################
+     
+     
 
     leftEndpt   =   0.0;
     rightEndpt  =   100;
@@ -43,7 +38,9 @@ int main(int argc, char* argv[]){
     gsl_vector* SIRFuncValRight  =  gsl_vector_alloc(  SIRdim );
     gsl_vector* SIRFuncValLeft   =  gsl_vector_calloc( SIRdim );
 
-    // Data on COVID-19 cases in Denmark from nyheder.tv2.dk 12/4/2021
+
+	//part B)
+    //covid-19 data
     double populationSize   =   5808180;
     double wasInfected      =   237792;
     double recovered        =   226630;
@@ -52,14 +49,14 @@ int main(int argc, char* argv[]){
     double vaccinated       =   445566;
     double removed          =   dead + recovered + vaccinated;
 
-    // Set the initial values for the population
+    
     gsl_vector_set(SIRFuncValLeft, 0, populationSize - isInfected - removed);
     gsl_vector_set(SIRFuncValLeft, 1, isInfected);
     gsl_vector_set(SIRFuncValLeft, 2, removed);
 
     FILE* SIR_outputStream = fopen(argv[2], "w");
-    rkdriver(&SIRmodel, leftEndpt, SIRFuncValLeft, rightEndpt, SIRFuncValRight, step, absAcc, relAcc, SIR_outputStream);    // Call ODE solver
-    fclose(SIR_outputStream);// Close file stream
+    rkdriver(&SIRmodel, leftEndpt, SIRFuncValLeft, rightEndpt, SIRFuncValRight, step, absAcc, relAcc, SIR_outputStream);    
+    fclose(SIR_outputStream);
 
     gsl_vector* SIR2funcValRight  =  gsl_vector_alloc(SIRdim);
     gsl_vector* SIR2funcValLeft   =  gsl_vector_calloc(SIRdim);
@@ -67,15 +64,11 @@ int main(int argc, char* argv[]){
     gsl_vector_set(SIR2funcValLeft, 1, isInfected);
     gsl_vector_set(SIR2funcValLeft, 2, removed);
     FILE* SIR2_outputStream = fopen(argv[3], "w");
-    rkdriver(&SIRmodel2, leftEndpt, SIR2funcValLeft, rightEndpt, SIR2funcValRight, step, absAcc, relAcc, SIR2_outputStream);    // Call ODE solver
-    fclose(SIR2_outputStream);// Close file stream
-    // _________________________________________________________________________________________________________________
+    rkdriver(&SIRmodel2, leftEndpt, SIR2funcValLeft, rightEndpt, SIR2funcValRight, step, absAcc, relAcc, SIR2_outputStream);    
+    fclose(SIR2_outputStream);
 
 
-    // ###########################################################
-    // # - SOLVE THE THREE BODY PROBLEM; FIGURE EIGHT SOLUTION - #
-    // ###########################################################
-
+	//part C)
     // Initial values from https://arxiv.org/abs/math/0011268
     leftEndpt           =   0.0;
     rightEndpt          =   6.32591398;
@@ -111,10 +104,8 @@ int main(int argc, char* argv[]){
     gsl_vector_set(threebodyFuncValLeft, 11, init_vel_y_3);
 
     FILE* threebody_outputStream = fopen(argv[4], "w");
-    rkdriver(&threeBodyProb, leftEndpt, threebodyFuncValLeft, rightEndpt, threebodyFuncValRight, step, absAcc, relAcc, threebody_outputStream);    // Call ODE solver
-    fclose(threebody_outputStream);// Close file stream
-    // _________________________________________________________________________________________________________________
-
+    rkdriver(&threeBodyProb, leftEndpt, threebodyFuncValLeft, rightEndpt, threebodyFuncValRight, step, absAcc, relAcc, threebody_outputStream);   
+    fclose(threebody_outputStream);
 
 
     // Free allocated memory
@@ -126,7 +117,6 @@ int main(int argc, char* argv[]){
     gsl_vector_free(SIR2funcValLeft);
     gsl_vector_free(threebodyFuncValRight);
     gsl_vector_free(threebodyFuncValLeft);
-    // _________________________________________________________________________________________________________________
 
     return 0;
 }

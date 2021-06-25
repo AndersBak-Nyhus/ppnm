@@ -5,12 +5,12 @@
 
 #include "integration.h"
 
-void print_testResults(char* string, double integralVal, double exactVal, double absAcc, double relAcc, double integrationError, int numOfCalls){
+void print_testResults(char* string, double integralVal, double exactVal, double absAcc, double relAcc, double integrationError, int Calls){
     printf("\n%s  : %g\n", string, integralVal);
     printf("Error goal                       : %.25g\n", absAcc + fabs( exactVal ) * relAcc);
     printf("Error                     : %.25g\n", fabs(integralVal - exactVal));
     printf("Calculated error estimate          : %.25g\n", integrationError);
-    printf("Function was called %i times:\n", numOfCalls);
+    printf("Function was called %i times:\n", Calls);
 }
 
 void print_whichTest(char* string, double exactVal){
@@ -27,7 +27,7 @@ int main(int argc, char* argv[]){
     double absAcc       =   1e-3;
     double relAcc       =   1e-3;
 
-    int     numOfCalls          =   0;
+    int     Calls          =   0;
     double  integrationError    =   0;
 
     printf("\nPart A)\nRecursive adaptive integrator");
@@ -36,26 +36,26 @@ int main(int argc, char* argv[]){
     double exactVal     =   2.0/3.0;
     print_whichTest("∫_0^1 dx √(x) = 2/3 =", exactVal);
     double firstTestFunc ( double x ){
-        numOfCalls++;
+        Calls++;
         return sqrt( x ) ;
     };
 
     double integralVal  =   integrate( firstTestFunc, leftEndPt, rightEndPt, absAcc, relAcc, &integrationError );
 
-    print_testResults("Numerical integration", integralVal, exactVal, absAcc, relAcc, integrationError, numOfCalls);
+    print_testResults("Numerical integration", integralVal, exactVal, absAcc, relAcc, integrationError, Calls);
 
 
 
     double secondTestFunc ( double x ){
-        numOfCalls++;
+        Calls++;
         return 4 * sqrt( 1 - x*x );
     };
-    numOfCalls = 0;
+    Calls = 0;
     integrationError = 0;
     integralVal = integrate( secondTestFunc, leftEndPt, rightEndPt, absAcc, relAcc, &integrationError);
     exactVal = M_PI;
     print_whichTest("∫_0^1 dx 4√(1-x²) = π =", exactVal);
-    print_testResults("Numerical integration", integralVal, exactVal, absAcc, relAcc, integrationError, numOfCalls);
+    print_testResults("Numerical integration", integralVal, exactVal, absAcc, relAcc, integrationError, Calls);
 
     printf("\n");
     // Part B)
@@ -66,50 +66,50 @@ int main(int argc, char* argv[]){
     print_whichTest("∫_0^1 dx 1/√(x) = 2 = ", exactVal);
 
     double thirdTestFunc ( double x ){
-        numOfCalls++;
+        Calls++;
         return 1/sqrt(x);
     };
 
-    numOfCalls = 0;
+    Calls = 0;
     integrationError = 0;
     integralVal = open_quad(thirdTestFunc, leftEndPt, rightEndPt, absAcc, relAcc, &integrationError);
-    print_testResults("Numerical integration with Clenshaw-Curtis", integralVal, exactVal, absAcc, relAcc, integrationError, numOfCalls);
+    print_testResults("Numerical integration with Clenshaw-Curtis", integralVal, exactVal, absAcc, relAcc, integrationError, Calls);
 
-    numOfCalls = 0;
+    Calls = 0;
     integrationError = 0;
     integralVal = adapt(thirdTestFunc, leftEndPt, rightEndPt, absAcc, relAcc, &integrationError);
-    print_testResults("Numerical integration without Clenshaw-Curtis", integralVal, exactVal, absAcc, relAcc, integrationError, numOfCalls);
+    print_testResults("Numerical integration without Clenshaw-Curtis", integralVal, exactVal, absAcc, relAcc, integrationError, Calls);
 
     exactVal = -4.0;
     print_whichTest("∫_0^1 dx ln(x)/√(x) = -4 = ", exactVal);
 
     double fourthTestFunc ( double x ){
-        numOfCalls++;
+        Calls++;
         return log(x)/sqrt(x);
     };
 
-    numOfCalls = 0;
+    Calls = 0;
     integrationError = 0;
     integralVal = open_quad(fourthTestFunc, leftEndPt, rightEndPt, absAcc, relAcc, &integrationError);
-    print_testResults("Numerical integration with Clenshaw-Curtis", integralVal, exactVal, absAcc, relAcc, integrationError, numOfCalls);
+    print_testResults("Numerical integration with Clenshaw-Curtis", integralVal, exactVal, absAcc, relAcc, integrationError, Calls);
 
-    numOfCalls = 0;
+    Calls = 0;
     integrationError = 0;
     integralVal = adapt(fourthTestFunc, leftEndPt, rightEndPt, absAcc, relAcc, &integrationError);
-    print_testResults("Numerical integration without Clenshaw-Curtis", integralVal, exactVal, absAcc, relAcc, integrationError, numOfCalls);
+    print_testResults("Numerical integration without Clenshaw-Curtis", integralVal, exactVal, absAcc, relAcc, integrationError, Calls);
 
     exactVal = M_PI;
     print_whichTest("∫_0^1 dx 4√(1-x²) = π = ", exactVal);
 
-    numOfCalls = 0;
+    Calls = 0;
     integrationError = 0;
     integralVal = open_quad(secondTestFunc, leftEndPt, rightEndPt, absAcc, relAcc, &integrationError);
-    print_testResults("Numerical integration with Clenshaw-Curtis", integralVal, exactVal, absAcc, relAcc, integrationError, numOfCalls);
+    print_testResults("Numerical integration with Clenshaw-Curtis", integralVal, exactVal, absAcc, relAcc, integrationError, Calls);
 
-    numOfCalls = 0;
+    Calls = 0;
     integrationError = 0;
     integralVal = adapt(secondTestFunc, leftEndPt, rightEndPt, absAcc, relAcc, &integrationError);
-    print_testResults("Numerical integration without Clenshaw-Curtis", integralVal, exactVal, absAcc, relAcc, integrationError, numOfCalls);
+    print_testResults("Numerical integration without Clenshaw-Curtis", integralVal, exactVal, absAcc, relAcc, integrationError, Calls);
 
     double gslTestFunc( double x, void* params ){
         params = NULL;
@@ -139,15 +139,15 @@ int main(int argc, char* argv[]){
     printf("\nPart C)\nInfinite limits\n");
 
     double fifthTestFunc( double x ){
-        numOfCalls++;
+        Calls++;
         return exp(-x*x);
     }
     exactVal = sqrt(M_PI);
     print_whichTest("∫_-inf^inf dx exp(-x²) = √π =", exactVal);
-    numOfCalls = 0;
+    Calls = 0;
     integrationError = 0;
     integralVal = integrate(fifthTestFunc, -INFINITY, INFINITY, absAcc, relAcc, &integrationError);
-    print_testResults("Numerical integration", integralVal, exactVal, absAcc, relAcc, integrationError, numOfCalls);
+    print_testResults("Numerical integration", integralVal, exactVal, absAcc, relAcc, integrationError, Calls);
 
     double gslTestFunc2( double x, void* params ){
         params = NULL;
@@ -167,16 +167,16 @@ int main(int argc, char* argv[]){
 
 
     double sixthTestFunc( double x ){
-        numOfCalls++;
+        Calls++;
         return 1/(1 + x*x);
     }
 
     exactVal = M_PI/2;
     print_whichTest("∫_0^inf dx 1/(1+x²) = π/2 =", exactVal);
-    numOfCalls = 0;
+    Calls = 0;
     integrationError = 0;
     integralVal = integrate( sixthTestFunc, 0, INFINITY, absAcc, relAcc, &integrationError);
-    print_testResults("Numerical integration", integralVal, exactVal, absAcc, relAcc, integrationError, numOfCalls);
+    print_testResults("Numerical integration", integralVal, exactVal, absAcc, relAcc, integrationError, Calls);
 
     double gslTestFunc3( double x, void* params ){
         params = NULL;
@@ -195,10 +195,10 @@ int main(int argc, char* argv[]){
 
     exactVal = M_PI/2;
     print_whichTest("∫-inf,0 dx  1/(1+x²) = π/2 =", exactVal);
-    numOfCalls = 0;
+    Calls = 0;
     integrationError = 0;
     integralVal = integrate( sixthTestFunc, -INFINITY, 0, absAcc, relAcc, &integrationError);
-    print_testResults("Numerical integration", integralVal, exactVal, absAcc, relAcc, integrationError, numOfCalls);
+    print_testResults("Numerical integration", integralVal, exactVal, absAcc, relAcc, integrationError, Calls);
 
 
     gsl_function my_gsl_test_func4;

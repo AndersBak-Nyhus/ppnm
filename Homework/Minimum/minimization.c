@@ -100,19 +100,19 @@ void quasi_newtonMethod(double func(gsl_vector*), gsl_vector* minimum, double to
             gsl_vector_scale(newtonStep, 0.5);
         }
 
-        numeric_gradient(func, minimum_next, gradientVal_next); // Compute gradient in the next step
+        numeric_gradient(func, minimum_next, gradientVal_next);
 
         gsl_vector_memcpy(solution, gradientVal_next);
-        gsl_blas_daxpy(-1, gradientVal, solution); /* y=grad(x+s)-grad(x) */
-        gsl_vector_memcpy(solutionChange, newtonStep); /* u=s */
-        gsl_blas_dgemv(CblasNoTrans, -1, inverse_hessianMatrix, solution, 1, solutionChange); /* u=s-By */
+        gsl_blas_daxpy(-1, gradientVal, solution);
+        gsl_vector_memcpy(solutionChange, newtonStep);
+        gsl_blas_dgemv(CblasNoTrans, -1, inverse_hessianMatrix, solution, 1, solutionChange);
 
-        gsl_matrix* solChangeSolChangeTrans = gsl_matrix_calloc(dimensions, dimensions); //u*u^T
+        gsl_matrix* solChangeSolChangeTrans = gsl_matrix_calloc(dimensions, dimensions);
         gsl_blas_dsyr(CblasUpper, 1.0, solutionChange, solChangeSolChangeTrans);
-        double solChangeTransSol; // u^T*y
+        double solChangeTransSol;
         gsl_blas_ddot(solutionChange, solution, &solChangeTransSol);
-        if(fabs(solChangeTransSol) > 1e-12){ // SR1 update
-            gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1.0 / solChangeTransSol, solChangeSolChangeTrans, identity, 1.0, inverse_hessianMatrix); // B= B + delta B
+        if(fabs(solChangeTransSol) > 1e-12){
+            gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1.0 / solChangeTransSol, solChangeSolChangeTrans, identity, 1.0, inverse_hessianMatrix);
         }
 
         gsl_vector_memcpy(minimum, minimum_next);

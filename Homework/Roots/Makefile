@@ -34,4 +34,4 @@ $(TXT) : $(EXE)
 $(EXE): $(OBJ) $(HDRS)
 
 clean:
-	$(RM) $(EXE) $(TXT) $(OBJ) $(IMG)
+	$(RM) $(EXE) $(TXT) $(OBJ) $(IMG) $(CDATA)

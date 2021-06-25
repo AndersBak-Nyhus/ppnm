@@ -26,7 +26,7 @@ void newtonMethod(void func(gsl_vector* point, gsl_vector* funcVals), gsl_vector
     func(startingPoint, funcVal);
     while (gsl_blas_dnrm2(funcVal) > tolerance) {
         count++;
-        assert(count < 1e5);
+        assert(count < 1e4);
 
         for (int dimId = 0; dimId < dimensions; dimId++){
             gsl_vector_set(startingPoint, dimId, gsl_vector_get(startingPoint, dimId) + stepSize);

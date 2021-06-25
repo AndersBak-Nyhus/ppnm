@@ -1,7 +1,3 @@
-//
-// Created by marc on 4/12/21.
-//
-
 #ifndef CLION_TESTING_FUNCTIONS_H
 #define CLION_TESTING_FUNCTIONS_H
 
@@ -13,4 +9,4 @@ void SIRmodel       (double var, gsl_vector* funcVal, gsl_vector* funcDeriv);
 void SIRmodel2      (double var, gsl_vector* funcVal, gsl_vector* funcDeriv);
 void threeBodyProb  (double var, gsl_vector* funcVal, gsl_vector* funcDeriv);
 
-#endif //CLION_TESTING_FUNCTIONS_H
+#endif 

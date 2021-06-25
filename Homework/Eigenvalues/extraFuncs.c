@@ -3,11 +3,11 @@
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_blas.h>
 
-#include "extrafuncs.h"
+#include "extraFuncs.h"
 
 double randomNumber( unsigned int *seed ){
-  double maxRand      =   (double)RAND_MAX;           // Maximum random number, cast to double
-  double randNum      =   (double)rand_r( seed );     // Generate pseudo-random number from seed, cast to double
+  double maxRand      =   (double)RAND_MAX;           
+  double randNum      =   (double)rand_r( seed );     
   return randNum/maxRand;
 }
 

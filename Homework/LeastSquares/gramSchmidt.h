@@ -9,6 +9,6 @@ void gramSchmidt_solve(gsl_matrix* orthogonalMatrix, gsl_matrix* triangularMatri
 void gramSchmidt_inverse( gsl_matrix* orthogonalMatrix  ,
                           gsl_matrix* triangularMatrix  ,
                           gsl_matrix* inverseMatrix      );
-void gramSchmidt_inverseTriang( gsl_matrix* triangularMatrix, gsl_matrix* inverseMatrix );
 
+void gramSchmidt_inverseTriang( gsl_matrix* triangularMatrix, gsl_matrix* inverseMatrix );
 #endif

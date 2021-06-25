@@ -1,6 +1,6 @@
 set terminal png
 set title "SIR model of Denmark, $T_c = 2.5, T_r = 25$"
-set xlabel "t [days]"
+set xlabel "Time"
 set ylabel "Number"
 set output "SIR.png"
 set tics in

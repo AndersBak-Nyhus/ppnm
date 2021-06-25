@@ -53,11 +53,11 @@ void jacobiDiag (gsl_matrix* matrix, gsl_matrix* eigVecMat) {
                 double s = sin(angle);
                 double new_app = c * c * app - 2 * s * c * apq + s * s * aqq;
                 double new_aqq = s * s * app + 2 * s * c * apq + c * c * aqq;
-                if (new_app != app || new_aqq != aqq){ // do rotation
+                if (new_app != app || new_aqq != aqq){
                     changed = 1;
                     jacobiMultiply_right(matrix,    firstId, secondId,  angle);
-                    jacobiMultiply_left( matrix,    firstId, secondId, -angle); // A <- J^T * A * J
-                    jacobiMultiply_right(eigVecMat, firstId, secondId,  angle); // V <- V * J
+                    jacobiMultiply_left( matrix,    firstId, secondId, -angle); 
+                    jacobiMultiply_right(eigVecMat, firstId, secondId,  angle); 
                 }
             }
         }

@@ -6,7 +6,6 @@
 #define RND (double ) rand ( ) /RAND_MAX
 
 complex plainmc(int dim,double f(double* x),double* a,double* b,int N){
-        //Function from the homework page
 
 	double V = 1;
 	for(int i = 0; i < dim; i++){

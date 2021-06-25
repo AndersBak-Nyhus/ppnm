@@ -6,9 +6,9 @@
 #include <gsl/gsl_blas.h>
 
 #include "jacobi.h"
-#include "extrafuncs.h"
+#include "extraFuncs.h"
 
-void test_runtime(int numOfReps, int startRep, char* my_outputFilename, char* gsl_outputFilename, unsigned int* seed);
+void runtime(int Reps, int startRep, char* my_outputFilename, char* gsl_outputFilename, unsigned int* seed);
 
 int main(int argc, char* argv[]){
     printf("\n\n");
@@ -104,9 +104,9 @@ int main(int argc, char* argv[]){
     gsl_matrix_free(testMat);
     gsl_matrix_free(hamiltonian);
 
-    int numOfReps = 100;
+    int Reps = 100;
     int startRep  = 50;
-    test_runtime(numOfReps, startRep, argv[2], argv[3], &seed);
+    runtime(Reps, startRep, argv[2], argv[3], &seed);
 
     return 0;
 }

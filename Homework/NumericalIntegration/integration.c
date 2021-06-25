@@ -1,7 +1,3 @@
-//
-// Created by marc on 4/25/21.
-//
-
 #include "integration.h"
 
 #include<math.h>
@@ -11,11 +7,15 @@
 double adapt24 ( double func(double), double leftEndPt, double rightEndPt, double absAcc, double relAcc, double second_funcVal, double third_funcVal, int numOfRecursions, double* integrationError  ){
     assert( numOfRecursions < 1e6 );
 
-    double first_funcVal    =   func( leftEndPt + 1*( rightEndPt - leftEndPt )/6 );     // The value of the function in the left,
-    double fourth_funcVal   =   func( leftEndPt + 5*( rightEndPt - leftEndPt )/6 );     // and right end points, respectively
+    double first_funcVal    =   func( leftEndPt + 1*( rightEndPt - leftEndPt )/6 );     
+    
+    double fourth_funcVal   =   func( leftEndPt + 5*( rightEndPt - leftEndPt )/6 );     
+    
 
-    double higherOrderEval  =   ( 2*first_funcVal + second_funcVal + third_funcVal + fourth_funcVal*2 ) * ( rightEndPt - leftEndPt ) / 6;     // Q from Dmitris notes, the trapezoid quadrature
-    double lowerOrderEval   =   (   first_funcVal + second_funcVal + third_funcVal + fourth_funcVal   ) * ( rightEndPt - leftEndPt ) / 4;     // q from Dmitris notes, the rectangular quadrature
+    double higherOrderEval  =   ( 2*first_funcVal + second_funcVal + third_funcVal + fourth_funcVal*2 ) * ( rightEndPt - leftEndPt ) / 6;     
+    
+    double lowerOrderEval   =   (   first_funcVal + second_funcVal + third_funcVal + fourth_funcVal   ) * ( rightEndPt - leftEndPt ) / 4;     
+    
 
     double tolerance        =   absAcc + relAcc * fabs(higherOrderEval);
     double error            =   fabs( higherOrderEval - lowerOrderEval );
