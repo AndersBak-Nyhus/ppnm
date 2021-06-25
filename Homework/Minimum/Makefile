@@ -8,28 +8,20 @@ PLTUTIL =  pyxplot
 
 EXE   	=  main
 OBJ  	=  main.o minimization.o
-HDRS    =  minimization.h
+HD      =  minimization.h
 TXT     =  output.txt
-IMGFL   =  plot.png
-GPI     =  plot.gpi
 DATA    =  data.txt
 
 .PHONEY: default
-default: print #$(IMGFL)
+default: print
 
-#hydrogen_plot.png: $(HGPI) $(HDATA)
-#	pyxplot $<
-
-#convergence_plot.png: $(CGPI) $(CDATA)
-#	pyxplot $<
 
 print: $(TXT)
-#	$(PIPE) $<
 
 $(TXT) : $(EXE)
-	./$< $(DATA) #1> $(TXT)
+	./$< $(DATA) 1> $(TXT)
 
-$(EXE): $(OBJ) $(HDRS)
+$(EXE): $(OBJ) $(HD)
 
 clean:
 	$(RM) $(EXE) $(TXT) $(OBJ)

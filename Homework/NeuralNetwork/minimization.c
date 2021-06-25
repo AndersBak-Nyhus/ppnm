@@ -18,9 +18,9 @@ void numeric_gradient (double func(gsl_vector*), gsl_vector* minimum, gsl_vector
     double stepSize =   sqrt(DBL_EPSILON);
 
     double funcVal  =   func(minimum);
-    int numOfDims   =   minimum -> size;
+    int DIms   =   minimum -> size;
 
-    for(int dimId=0; dimId < numOfDims; ++dimId){
+    for(int dimId=0; dimId < DIms; ++dimId){
         double step;
         double minimum_i   =   gsl_vector_get(minimum, dimId);
 
@@ -41,9 +41,9 @@ void quasi_newtonMethod(double func(gsl_vector*), gsl_vector* minimum, double to
     double stepSize = sqrt(DBL_EPSILON);
     int dimensions = minimum -> size;
 
-    int numOfSteps      =   0;
-    int numOfResets     =   0;
-    int numOfScales     =   0;
+    int Steps      =   0;
+    int Resets     =   0;
+    int Scales     =   0;
 
     gsl_matrix* inverse_hessianMatrix   =   gsl_matrix_alloc(dimensions, dimensions);
     gsl_matrix_set_identity(inverse_hessianMatrix);
@@ -63,8 +63,8 @@ void quasi_newtonMethod(double func(gsl_vector*), gsl_vector* minimum, double to
     double funcVal  =  func(minimum);
     double funcVal_next;
 
-    while(numOfSteps < 1000){
-        numOfSteps++;
+    while(Steps < 1000){
+        Steps++;
 
         gsl_blas_dgemv(CblasNoTrans, -1, inverse_hessianMatrix, gradientVal, 0, newtonStep);
         if( gsl_blas_dnrm2(newtonStep) < stepSize * gsl_blas_dnrm2(minimum) ) {
@@ -88,11 +88,11 @@ void quasi_newtonMethod(double func(gsl_vector*), gsl_vector* minimum, double to
             gsl_blas_ddot(newtonStep, gradientVal, &sTransGrad);
 
             if(funcVal_next < funcVal + 0.01 * sTransGrad){
-                numOfScales++;
+                Scales++;
                 break;
             }
             if(scale < stepSize){
-                numOfResets++;
+                Resets++;
                 gsl_matrix_set_identity(inverse_hessianMatrix);
                 break;
             }
@@ -130,6 +130,6 @@ void quasi_newtonMethod(double func(gsl_vector*), gsl_vector* minimum, double to
     gsl_vector_free(solutionChange);
     gsl_vector_free(broydenVec);
 
-    fprintf(stderr, "quasi_newtonMethod: \n  Steps = %i,\n  Scales = %i,\nHessian matrix resets = %i\n  f(x) = %.1e\n\n", numOfSteps, numOfScales, numOfResets, funcVal);
+    fprintf(stderr, "quasi_newtonMethod: \n  Steps = %i,\n  Scales = %i,\nHessian matrix resets = %i\n  f(x) = %.1e\n\n", Steps, Scales, Resets, funcVal);
 
 }

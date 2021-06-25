@@ -1,0 +1,17 @@
+
+Part A)
+
+Test on f(x) = 1 + x² + y² ...
+Initial value (x, y) = (4, 10)
+Minima (x, y) = (6, 13)
+Real minima (x, y) = (6, 13)
+
+
+Rosenbrock's
+Initial value (x, y) = (0, 0)
+Minima (x, y) = (-0.733761, 0.650117)
+
+
+Himmelblau's
+Initial value (x, y) = (2, 1)
+Minima (x, y) = (3.56362, -1.61575)
