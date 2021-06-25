@@ -4,14 +4,7 @@
 #include<stdlib.h>
 #include<gsl/gsl_vector.h>
 #include "minimization.h"
-
-typedef struct {
-	int n;
-	double(*f)(double);
-	double(*fm)(double);
-	double(*F)(double;);
-	gsl_vector* params;
-} ann;
+#include "ann.h"
 
 ann* ann_alloc(int n, double(*f)(double), double(*fm)(double), double(*F)(double)){ // function to allocate memory of network
 	ann* network = malloc(sizeof(ann)); // initialize with zeros
@@ -79,14 +72,8 @@ static ann* network_p;
 
 
 double cost_func(gsl_vector* p){
-	/*
-	printf("size of p: %d\n",p -> size);
-	printf("N: %d\n",N);
-	*/
-	//int d = p -> size;
-	//assert(d==3*NETWORK->n);
+
 	gsl_vector_memcpy(network_p -> params, p);
-	//for(int i = 0; i < d; i++)NETWORK -> gsl_vector_set(params,i,gsl_vector_get(p,i));
 
 	double sum = 0;
 	for(int k = 0; k < N; k++){
@@ -115,42 +102,13 @@ void ann_train(ann* network, int nx, gsl_vector* xs, gsl_vector* ys){
 	//int d = 3*network -> n;
 	double acc = 1e-3;
 	gsl_vector_memcpy(p,network->params);
-	/*for (int i = 0;i < p->size;i++){
-		printf("%g\n",gsl_vector_get(p,i));
-	}*/
+
 	quasi_newtonMethod(cost_func, p, acc);
 	gsl_vector_memcpy(network->params,p);
 
 	gsl_vector_free(p);
 }
 
-
-
-
-
-/*
-void ann_train(ann* network,gsl_vector* xs,gsl_vector* ys){
-
-	double cost_function(gsl_vector* p){
-		gsl_vector_memcpy(network->params,p);
-		double sum=0;
-		for(int i=0;i<xs->size;i++){
-			double xi=gsl_vector_get(xs,i);
-			double yi=gsl_vector_get(ys,i);
-			double fi=ann_response(network,xi);
-			sum+=fabs(fi-yi);
-		}
-		return sum/xs->size;
-	}
-
-	gsl_vector* p=gsl_vector_alloc(network->params->size);
-	gsl_vector_memcpy(p,network->params);
-	quasi_newtonMethod(cost_function,p,1e-3);
-	gsl_vector_memcpy(network->params,p);
-	gsl_vector_free(p);
-
-}
-*/
 
 
 

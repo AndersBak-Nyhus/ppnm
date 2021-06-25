@@ -8,6 +8,7 @@ IMG = plot.png
 PLTXT = Pts.txt Funcs.txt
 EXE = main
 OBJ = main.o ann.o minimization.o
+HD = ann.h
 
 .PHONEY: default
 
@@ -21,11 +22,11 @@ $(IMG): plots.pgi $(PLTXT)
 $(TXT): $(EXE)
 	./$(EXE) > $(TXT)
 
-main.o: main.c
+main.o: main.c $(HD)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-main: $(OBJ)
-main.c: ann.c
+main: $(OBJ) $(HD)
+main.c: ann.c $(HD)
 ann.c: minimization.c
 
 .PHONEY: clean
