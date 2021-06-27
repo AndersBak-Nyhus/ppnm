@@ -13,5 +13,5 @@ h(x) = dam*exp(dlambdam*x)
 plot f(x) with line lw 2 col MidnightBlue title "Fit"\
 ,g(x) with line lw 1 linetype 3 col Black title "Fit with $5\%$ error"\
 ,h(x) with line lw 1 linetype 3 col Black title "Fit with $5\%$ error"\
-,"data.txt" using 1:2 with points col Black pointtype 1 title "Datapoints"\
+,"data.txt" using 1:2 with points col Black pointtype 1 title "Data"\
 ,"data.txt" using 1:2:3 with yerrorbars col Black pointtype 1 title "Error"\

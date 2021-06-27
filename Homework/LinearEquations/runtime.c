@@ -10,11 +10,11 @@
 #include "extraFuncs.h"
 
 
-void runtime(int Reps, int startRep, char* my_outputFilename, char* gsl_outputFilename, unsigned int* seed){
+void runtime(int Reps, int startRep, char* outputFilename, char* gsl_outputFilename, unsigned int* seed){
   double scale      =  0   ;
   int Dims;
 
-  FILE* myOutputFileStream      =  fopen(my_outputFilename,  "w");
+  FILE* myOutputFileStream      =  fopen(outputFilename,  "w");
   FILE* myOutputFileStream_gsl  =  fopen(gsl_outputFilename, "w");
 
 

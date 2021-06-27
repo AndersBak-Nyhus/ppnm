@@ -4,13 +4,14 @@
 #include <gsl/gsl_blas.h>
 
 #include "extrafuncs.h"
-
+//create random number
 double randomNumber( unsigned int *seed ){
-  double maxRand      =   (double)RAND_MAX;           // Maximum random number, cast to double
-  double randNum      =   (double)rand_r( seed );     // Generate pseudo-random number from seed, cast to double
+  double maxRand      =   (double)RAND_MAX;           
+  double randNum      =   (double)rand_r( seed );     
   return randNum/maxRand;
 }
 
+//Print vector
 void vector_print(char* string, gsl_vector* vector){
 	printf("%s\n", string);
 	for(int iter = 0; iter < vector -> size; iter++){
@@ -18,7 +19,7 @@ void vector_print(char* string, gsl_vector* vector){
 	}
   printf("\n");
 }
-
+//set data
 void set_data_tall(gsl_matrix* testMatTall, gsl_vector* RHSvecTall, unsigned int *LHSseed, unsigned int *RHSseed){
   for(int rowId = 0; rowId < testMatTall -> size1; rowId++){
 		for(int colId = 0; colId < testMatTall -> size2; colId++){
@@ -37,6 +38,7 @@ void set_data_square(gsl_matrix* testMatSquare, gsl_vector* RHSvecSquare, unsign
   }
 }
 
+//print Matrix in output
 void print_matrix(int numOfRows, gsl_matrix* matrixToPrint, char* string ){
   printf("\n%s\n", string);
   for (int rowId = 0; rowId < numOfRows; rowId++){
@@ -53,14 +55,14 @@ void print_matrix(int numOfRows, gsl_matrix* matrixToPrint, char* string ){
 }
 
 
-void compute_deviations(int numOfPts, double* yData, double* yDev){
-    for (int dev = 0; dev < numOfPts; dev++){
+void compute_devs(int Pts, double* yData, double* yDev){
+    for (int dev = 0; dev < Pts; dev++){
         yDev[dev] = yData[dev]/20.0;
     }
 }
 
-void log_featureTransform( int numOfPts, double* yData, double* yDataTrans, double* yDev, double* yDevTrans ){
-    for (int id = 0; id < numOfPts; id++ ){
+void log_featureTransform( int Pts, double* yData, double* yDataTrans, double* yDev, double* yDevTrans ){
+    for (int id = 0; id < Pts; id++ ){
         yDataTrans[id]  =  log(yData[id]);
         yDevTrans[id]   =  yDev[id] / yData[id];
     }

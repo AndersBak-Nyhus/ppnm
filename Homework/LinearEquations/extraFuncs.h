@@ -7,6 +7,6 @@
 double randomNumber    ( unsigned int *seed );
 void   vector_print    (char* string, gsl_vector* vector);
 void   set_data        (gsl_matrix* tallMatrix, gsl_vector* tallRHSVector, unsigned int *seed);
-void   print_matrix    (int numOfRows, gsl_matrix* matrixToPrint, char* string );
+void   print_matrix    (int Rows, gsl_matrix* matrixToPrint, char* string );
 
 #endif

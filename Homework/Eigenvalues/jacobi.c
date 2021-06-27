@@ -33,7 +33,7 @@ void jacobiMultiply_left(gsl_matrix* matrix, int firstId, int secondId, double a
 }
 
 
-void jacobiDiag (gsl_matrix* matrix, gsl_matrix* eigVecMat) {
+void jacobi_Diag (gsl_matrix* matrix, gsl_matrix* eigVecMat) {
 
     gsl_matrix_set_identity(eigVecMat);
 

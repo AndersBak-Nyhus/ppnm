@@ -1,5 +1,4 @@
 #include "integration.h"
-
 #include<math.h>
 #include<assert.h>
 #include<stdio.h>

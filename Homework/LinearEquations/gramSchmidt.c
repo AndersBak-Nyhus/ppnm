@@ -6,7 +6,7 @@
 
 #include "gramSchmidt.h"
 #include "backsub.h"
-
+//Gram Schmidt decomposition
 void gramSchmidt_decomp( gsl_matrix* matrixToQR, gsl_matrix* inputTriangularMatrix ){
 
 
@@ -59,11 +59,11 @@ void gramSchmidt_decomp( gsl_matrix* matrixToQR, gsl_matrix* inputTriangularMatr
   }
 }
 
-
-void gramSchmidt_solve( gsl_matrix* orthogonalMatrix  ,
-                        gsl_matrix* triangularMatrix  ,
-                        gsl_vector* rhsVec            ,
-                        gsl_vector* var                 ){
+//Gram Schmidt solver
+void gramSchmidt_solve( gsl_matrix* orthogonalMatrix,
+                        gsl_matrix* triangularMatrix,
+                        gsl_vector* rhsVec,
+                        gsl_vector* var){
 
 
   gsl_blas_dgemv(CblasTrans, 1.0, orthogonalMatrix, rhsVec, 0.0, var);
@@ -71,10 +71,10 @@ void gramSchmidt_solve( gsl_matrix* orthogonalMatrix  ,
 
 }
 
-
-void gramSchmidt_inverse( gsl_matrix* orthogonalMatrix  ,
-                          gsl_matrix* triangularMatrix  ,
-                          gsl_matrix* inverseMatrix      ){
+//Gram Schmidt inverse
+void gramSchmidt_inverse( gsl_matrix* orthogonalMatrix,
+                          gsl_matrix* triangularMatrix,
+                          gsl_matrix* inverseMatrix){
 
 
   int Dims = (triangularMatrix -> size1);

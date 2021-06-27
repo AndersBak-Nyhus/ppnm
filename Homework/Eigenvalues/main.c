@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
-
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_blas.h>
-
 #include "jacobi.h"
 #include "extraFuncs.h"
 
@@ -17,37 +15,39 @@ int main(int argc, char* argv[]){
     unsigned int seed = time(NULL);
     int dims = 5;
 
+//allocate memory
     gsl_matrix* matrix      =  gsl_matrix_alloc(dims, dims);
-    gsl_matrix* eigVecMat   =  gsl_matrix_alloc(dims, dims);
-    gsl_matrix* eigValMat   =  gsl_matrix_alloc(dims, dims);
+    gsl_matrix* Eigenvectors   =  gsl_matrix_alloc(dims, dims);
+    gsl_matrix* Eigenvalues   =  gsl_matrix_alloc(dims, dims);
 
+//put numbers into matrix
     set_data_symmetric(matrix, &seed);
-    gsl_matrix_memcpy(eigValMat, matrix);
+    gsl_matrix_memcpy(Eigenvalues, matrix);
 
-    print_matrix(dims, matrix, "Before diagonalization:");
-    jacobiDiag(eigValMat, eigVecMat);
+    print_matrix(dims, matrix, "Matrix before diagonalization:");
+    jacobi_Diag(Eigenvalues, Eigenvectors);
     
     gsl_matrix* tmp             =  gsl_matrix_alloc(dims, dims);
-    gsl_matrix* testIdentity    =  gsl_matrix_alloc(dims, dims);
-    gsl_matrix* testDiag        =  gsl_matrix_alloc(dims, dims);
+    gsl_matrix* Identity    =  gsl_matrix_alloc(dims, dims);
+    gsl_matrix* Diag        =  gsl_matrix_alloc(dims, dims);
     gsl_matrix* testMat         =  gsl_matrix_alloc(dims, dims);
 
-    gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1.0, matrix,    eigVecMat, 0.0, tmp          );
-    gsl_blas_dgemm(CblasTrans,   CblasNoTrans, 1.0, eigVecMat, tmp,       0.0, testDiag     );
-    gsl_blas_dgemm(CblasTrans,   CblasNoTrans, 1.0, eigVecMat, eigVecMat, 0.0, testIdentity );
-    gsl_blas_dgemm(CblasNoTrans, CblasTrans,   1.0, eigValMat, eigVecMat, 0.0, tmp          );
-    gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1.0, eigVecMat, tmp,       0.0, testMat      );
+    gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1.0, matrix,    Eigenvectors, 0.0, tmp          );
+    gsl_blas_dgemm(CblasTrans,   CblasNoTrans, 1.0, Eigenvectors, tmp,       0.0, Diag     );
+    gsl_blas_dgemm(CblasTrans,   CblasNoTrans, 1.0, Eigenvectors, Eigenvectors, 0.0, Identity );
+    gsl_blas_dgemm(CblasNoTrans, CblasTrans,   1.0, Eigenvalues, Eigenvectors, 0.0, tmp          );
+    gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1.0, Eigenvectors, tmp,       0.0, testMat      );
 
 
-    print_matrix(dims, eigVecMat,    "Eigenvectors V:     ");
-    print_matrix(dims, testIdentity, "Check V^T  * V = 1:    ");
-    print_matrix(dims, eigValMat,    "Eigenvalues D:      ");
-    print_matrix(dims, testDiag,     "Check V^T * A * V = D: ");
+    print_matrix(dims, Eigenvectors,    "Eigenvectors V:     ");
+    print_matrix(dims, Identity, "Check V^T  * V = 1:    ");
+    print_matrix(dims, Eigenvalues,    "Eigenvalues D:      ");
+    print_matrix(dims, Diag,     "Check V^T * A * V = D: ");
     print_matrix(dims, matrix,       "Symmetric matrix A:           ");
     print_matrix(dims, testMat,      "Check V * D * V^T = A: ");
 
 
-    // Part B
+    // Part B)
     printf("\n\n");
     printf("Part B):\n");
     printf("\n");
@@ -68,7 +68,7 @@ int main(int argc, char* argv[]){
     printf("Hamiltonian\n");
 
     gsl_matrix* eigStates = gsl_matrix_alloc(divisions,divisions);
-    jacobiDiag(hamiltonian, eigStates);
+    jacobi_Diag(hamiltonian, eigStates);
 
     printf("\nEigen-energies:\n");
     printf("#\tCalculated\tExact\n");
@@ -96,11 +96,11 @@ int main(int argc, char* argv[]){
     fprintf(myOutputFilestream, "\n");
 
     gsl_matrix_free(matrix);
-    gsl_matrix_free(eigValMat);
-    gsl_matrix_free(eigVecMat);
+    gsl_matrix_free(Eigenvalues);
+    gsl_matrix_free(Eigenvectors);
     gsl_matrix_free(tmp);
-    gsl_matrix_free(testDiag);
-    gsl_matrix_free(testIdentity);
+    gsl_matrix_free(Diag);
+    gsl_matrix_free(Identity);
     gsl_matrix_free(testMat);
     gsl_matrix_free(hamiltonian);
 

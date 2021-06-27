@@ -1,7 +1,7 @@
 set terminal png
 set title "Particle in a box"
-set xlabel "$x$"
-set ylabel "$\psi_n(x)$"
+set xlabel "x"
+set ylabel "Wavefunction"
 set output "plot.png"
 set tics in
 plot "box.txt" using 1:2 with line linewidth 3 col MidnightBlue title "$n = 0$"\

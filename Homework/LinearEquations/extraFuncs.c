@@ -2,7 +2,7 @@
 #include <gsl/gsl_blas.h>
 
 #include "extraFuncs.h"
-//creates random number
+//creates random number to insert in matrix
 double randomNumber( unsigned int *seed ){
   double maxRand      =   (double)RAND_MAX;           
   double randNum      =   (double)rand_r( seed );     
@@ -17,7 +17,7 @@ void vector_print(char* string, gsl_vector* vector){
   printf("\n");
 }
 
-//setting data inside matrices
+//setting data inside matrices with random number
 void set_data(gsl_matrix* tallMatrix, gsl_vector* tallRHSVector, unsigned int *seed){
 
   for(int rowId = 0; rowId < tallMatrix -> size1; rowId++){
@@ -29,11 +29,11 @@ void set_data(gsl_matrix* tallMatrix, gsl_vector* tallRHSVector, unsigned int *s
 }
 
 //printing matrix in output
-void print_matrix(int Rows, gsl_matrix* matrixToPrint, char* string ){
+void print_matrix(int Rows, gsl_matrix* PrintMatrix, char* string ){
   printf("\n%s\n", string);
   for (int rowId = 0; rowId < Rows; rowId++){
-    gsl_vector_view matrixToPrint_row = gsl_matrix_row (matrixToPrint, rowId);
-    gsl_vector* vector = &matrixToPrint_row.vector;
+    gsl_vector_view PrintMatrix_row = gsl_matrix_row (PrintMatrix, rowId);
+    gsl_vector* vector = &PrintMatrix_row.vector;
   	for(int iter = 0; iter < vector -> size; iter++){
       if ( gsl_vector_get(vector, iter) > 1e-10 ){
   		    printf("%10g\t", gsl_vector_get(vector, iter));

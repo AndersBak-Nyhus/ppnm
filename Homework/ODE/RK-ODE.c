@@ -1,8 +1,6 @@
 #include <math.h>
-
 #include "RK-ODE.h"
 #include "functions.h"
-
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_blas.h>

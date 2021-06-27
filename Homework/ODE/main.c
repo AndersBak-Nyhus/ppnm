@@ -69,7 +69,7 @@ int main(int argc, char* argv[]){
 
 
 	//part C)
-    // Initial values from https://arxiv.org/abs/math/0011268
+    
     leftEndpt           =   0.0;
     rightEndpt          =   6.32591398;
     int threebodyDim    =   12;

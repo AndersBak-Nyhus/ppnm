@@ -1,8 +1,6 @@
 #include <math.h>
-
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_blas.h>
-
 #include "extraFuncs.h"
 
 double randomNumber( unsigned int *seed ){
